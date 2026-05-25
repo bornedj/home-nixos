@@ -10,6 +10,7 @@
     ./programs/zsh.nix
     ./programs/nvim
     ./programs/tmux
+    ./programs/hyprland
     inputs.sops-nix.homeManagerModules.sops
   ];
   home.packages = with pkgs; [
@@ -73,11 +74,6 @@
       installVimSyntax = true;
   };
 
-  wayland.windowManager.hyprland = {
-      enable = true;
-      package = pkgs.hyprland;
-      systemd.enable = true;
-  };
    
   # dotfiles
   home.file.".local/bin/tmux-sessionizer.sh" = {
