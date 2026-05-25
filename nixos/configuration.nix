@@ -5,6 +5,10 @@
 
 { pkgs, lib, zen-browser, ... }:
 
+let 
+    monitorsXmlContent = builtins.readFile ./monitors.xml;
+    monitorsConfig = pkgs.writeText "gdm_monitors.xml" monitorsXmlContent;
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -90,23 +94,26 @@
   };
 
   # try to have proper monitor config on boot
-  system.activationScripts = {
-    gdm_config = {
-        deps = [ "specialfs" ];
-        text = ''
-          MONITORS_CONF_FILE=/etc/nixos/data/monitors.xml
-          GDM_CONF_PATH=/run/gdm/.config
-          if [ ! -d $GDM_CONF_PATH ]; then
-            mkdir -p $GDM_CONF_PATH
-          fi
-          if [ -f $MONITORS_CONF_FILE ]; then
-            cp -rf $MONITORS_CONF_FILE $GDM_CONF_PATH
-            chown gdm:gdm  $GDM_CONF_PATH/$(basename $MONITORS_CONF_FILE)
-            chmod 644 $GDM_CONF_PATH/$(basename $MONITORS_CONF_FILE)
-          fi
-        '';
-    };
-  };
+  systemd.tmpfiles.rules = [
+    "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsConfig}"
+  ];
+  # system.activationScripts = {
+  #   gdm_config = {
+  #       deps = [ "specialfs" ];
+  #       text = ''
+  #         MONITORS_CONF_FILE=/etc/nixos/data/monitors.xml
+  #         GDM_CONF_PATH=/run/gdm/.config
+  #         if [ ! -d $GDM_CONF_PATH ]; then
+  #           mkdir -p $GDM_CONF_PATH
+  #         fi
+  #         if [ -f $MONITORS_CONF_FILE ]; then
+  #           cp -rf $MONITORS_CONF_FILE $GDM_CONF_PATH
+  #           chown gdm:gdm  $GDM_CONF_PATH/$(basename $MONITORS_CONF_FILE)
+  #           chmod 644 $GDM_CONF_PATH/$(basename $MONITORS_CONF_FILE)
+  #         fi
+  #       '';
+  #   };
+  # };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

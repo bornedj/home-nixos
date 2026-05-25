@@ -91,4 +91,7 @@
   home.file.".config/ghostty/config.ghostty" = {
     source = ./programs/ghostty/config.ghostty;
   };
+  home.file.".config/monitors.xml" = {
+      source = ../nixos/monitors.xml;
+  };
 }
