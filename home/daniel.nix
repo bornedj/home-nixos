@@ -69,6 +69,12 @@
       enableZshIntegration = true;
       installVimSyntax = true;
   };
+
+  wayland.windowManager.hyprland = {
+      enable = true;
+      package = pkgs.hyprland;
+      systemd.enable = true;
+  };
    
   # dotfiles
   home.file.".local/bin/tmux-sessionizer.sh" = {
