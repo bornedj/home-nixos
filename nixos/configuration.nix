@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, zen-browser, ... }:
 
 {
   imports =
@@ -87,6 +87,25 @@
     ];
   };
 
+  # try to have proper monitor config on boot
+  system.activationScripts = {
+    gdm_config = {
+        deps = [ "specialfs" ];
+        text = ''
+          MONITORS_CONF_FILE=/etc/nixos/data/monitors.xml
+          GDM_CONF_PATH=/run/gdm/.config
+          if [ ! -d $GDM_CONF_PATH ]; then
+            mkdir -p $GDM_CONF_PATH
+          fi
+          if [ -f $MONITORS_CONF_FILE ]; then
+            cp -rf $MONITORS_CONF_FILE $GDM_CONF_PATH
+            chown gdm:gdm  $GDM_CONF_PATH/$(basename $MONITORS_CONF_FILE)
+            chmod 644 $GDM_CONF_PATH/$(basename $MONITORS_CONF_FILE)
+          fi
+        '';
+    };
+  };
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -103,6 +122,7 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
+    zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   environment.shells = with pkgs; [ zsh ];
