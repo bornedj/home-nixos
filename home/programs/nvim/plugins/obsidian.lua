@@ -6,20 +6,8 @@ require("obsidian").setup {
             path = "~/obsidian/personal",
         },
         {
-            name = "ess",
-            path = "~/obsidian/ess",
-        },
-        {
-            name = "architecture",
-            path = "~/obsidian/architecture",
-        },
-        {
             name = "daily_notes",
             path = "~/obsidian/daily",
-        },
-        {
-            name = "KIT",
-            path = "~/obsidian/KIT",
         },
     },
     daily_notes = {
