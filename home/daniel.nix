@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   home.username = "daniel";
@@ -35,6 +35,9 @@
 
     # secrets
     sops
+
+    # gaming
+    steam-tui
   ];
 
   programs.git = {
@@ -60,6 +63,10 @@
     ];
   };
 
+  programs.discord = {
+      enable = true;
+  };
+   
   # dotfiles
   home.file.".local/bin/tmux-sessionizer.sh" = {
     source = ./.local/bin/tmux-sessionizer.sh;

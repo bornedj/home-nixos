@@ -105,9 +105,21 @@
     git
   ];
 
+  environment.shells = with pkgs; [ zsh ];
+
+  nix.settings.trusted-users = [ "root" "daniel" ];
   security.sudo.extraRules = [
     { users = [ "daniel" ]; commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ]; }
   ];
+
+  # steam
+  programs.steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+  };
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
