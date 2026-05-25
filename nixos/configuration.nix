@@ -118,6 +118,8 @@
     "discord"
     "nvidia-x11"
     "nvidia-settings"
+    "cider-2"
+    "widevine-cdm"
   ];
 
   # List packages installed in system profile. To search, run:

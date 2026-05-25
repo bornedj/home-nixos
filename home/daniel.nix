@@ -35,6 +35,9 @@
 
     # secrets
     sops
+    
+    # music
+    cider-2
   ];
 
   programs.git = {
