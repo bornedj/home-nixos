@@ -35,9 +35,6 @@
 
     # secrets
     sops
-
-    # gaming
-    steam-tui
   ];
 
   programs.git = {
