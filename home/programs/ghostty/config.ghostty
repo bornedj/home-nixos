@@ -1,3 +1,7 @@
+# theming
 theme = Nord
+cursor-style = block
 
 shell-integration = zsh
+shell-integration-features = no-cursor
+
