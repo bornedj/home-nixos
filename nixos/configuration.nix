@@ -115,6 +115,8 @@
     "steam-run"
     "steamcmd"
     "discord"
+    "nvidia-x11"
+    "nvidia-settings"
   ];
 
   # List packages installed in system profile. To search, run:
