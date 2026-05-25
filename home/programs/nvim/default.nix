@@ -27,7 +27,6 @@ in
             nodePackages.bash-language-server
             nodePackages.vscode-langservers-extracted
             terraform-ls
-            angular-language-server
             lua-language-server
             emmet-ls
             dockerfile-language-server
@@ -35,6 +34,13 @@ in
             pyright
             nixd
         ];
+
+        # file used for dynamic store path import of lua snippets
+        xdg.configFile."nvim/hypr.lua" = ''
+        return {
+            hyprland_stubs = "${pkgs.hyprland}/share/hypr/stubs"
+        }
+        '';
 
         plugins = with pkgs.vimPlugins; [
             plenary-nvim
