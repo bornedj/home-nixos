@@ -1,6 +1,21 @@
 { pkgs, inputs, ... }:
 
 {
+  home.packages = with pkgs; [
+    pipewire
+  ];
+
+  services.pipewire = {
+      enable = true;
+      extraConfig = {
+          pipewire."99-silent-bell.conf" = {
+                  "context.properties" = {
+                      "module.x11.bell" = false;
+                  };
+              };
+      };
+  };
+
   wayland.windowManager.hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
