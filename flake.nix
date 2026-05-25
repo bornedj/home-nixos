@@ -21,7 +21,7 @@
   outputs = inputs@{ nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
       daniel = nixpkgs.lib.nixosSystem {
-        specialArgs = with inputs; { inherit zen-browser; };
+        specialArgs = with inputs; { inherit zen-browser; inherit hyprland; };
         modules = [
           ./nixos/configuration.nix
 

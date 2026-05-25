@@ -51,8 +51,10 @@ in
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
+  # services.displayManager.gdm.enable = true;
+  # services.desktopManager.gnome.enable = true;
+  environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
+  programs.hyprland.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
