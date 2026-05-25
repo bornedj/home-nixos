@@ -85,6 +85,7 @@
     packages = with pkgs; [
     #  thunderbird
     ];
+    shell = pkgs.zsh;
   };
 
   # try to have proper monitor config on boot
@@ -127,8 +128,6 @@
     zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
-  environment.shells = with pkgs; [ zsh ];
-
   nix.settings.trusted-users = [ "root" "daniel" ];
   security.sudo.extraRules = [
     { users = [ "daniel" ]; commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ]; }
@@ -142,6 +141,8 @@
       localNetworkGameTransfers.openFirewall = true;
   };
 
+  programs.zsh.enable = true;
+  environment.shells = with pkgs; [ zsh ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
