@@ -63,6 +63,12 @@
   programs.discord = {
       enable = true;
   };
+
+  programs.ghostty = {
+      enable = true;
+      enableZshIntegration = true;
+      installVimSyntax = true;
+  };
    
   # dotfiles
   home.file.".local/bin/tmux-sessionizer.sh" = {
