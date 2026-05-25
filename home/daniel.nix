@@ -79,4 +79,7 @@
     source = ./.local/bin/tmux-session-init.sh;
     executable = true;
   };
+  home.file.".config/ghostty/config.ghostty" = {
+    source = ./programs/ghostty/config.ghostty;
+  };
 }
