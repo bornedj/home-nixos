@@ -97,6 +97,16 @@ in
   systemd.tmpfiles.rules = [
     "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsConfig}"
   ];
+  systemd.packages = [
+    (pkgs.writeTextFile {
+        name = "monitors.conf";
+        destination = "/etc/systemd/system/gdm.service.d/monitors.conf";
+        text = ''
+        [services]
+        ExecStartPre=cp ${monitorsXmlContent} /run/gdm/.config/monitors.xml
+        '';
+    })
+  ];
   # system.activationScripts = {
   #   gdm_config = {
   #       deps = [ "specialfs" ];
