@@ -92,9 +92,11 @@
       source = ../nixos/monitors.xml;
   };
   # file used for dynamic store path import of lua snippets
-  home.file.".config/nvim/hypr.lua" = ''
-  return {
-    hyprland_stubs = "${pkgs.hyprland}/share/hypr/stubs"
-  }
-  '';
+  home.file.".config/nvim/hypr.lua" = {
+    text = ''
+    return {
+        hyprland_stubs = "${pkgs.hyprland}/share/hypr/stubs"
+    }
+    '';
+  };
 }
