@@ -13,6 +13,11 @@
     ./programs/hyprland
     inputs.sops-nix.homeManagerModules.sops
   ];
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.hack
+  ];
+
   home.packages = with pkgs; [
     # languages
     rustup
