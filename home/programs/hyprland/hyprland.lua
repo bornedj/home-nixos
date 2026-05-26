@@ -25,7 +25,7 @@ hl.monitor({
 
 -- benq horizontal
 hl.monitor({
-    output   = "DP-6",
+    output   = "DP-5",
     mode     = "1920x1080@144",
     position = "-2160x0@60",
     scale    = 1,
