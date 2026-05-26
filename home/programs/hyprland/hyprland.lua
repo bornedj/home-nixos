@@ -271,11 +271,12 @@ hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(music))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(discord))
---startupo
+-- autostart
 hl.on("hyprland.start", function ()
     hl.exec_cmd(terminal)
     hl.exec_cmd(discord)
     hl.exec_cmd(browser)
+    hl.exec_cmd("systemctl --user start hyprpolkitagent")
 end)
 
 local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())

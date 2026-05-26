@@ -8,6 +8,7 @@
     pipewire
     kdePackages.qtwayland
     libsForQt5.qt5.qtwayland
+    hyprpolkitagent
   ];
 
   wayland.windowManager.hyprland = {
