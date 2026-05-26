@@ -307,3 +307,207 @@ More “cold ink and water.”
 
 This is the right move because your wallpaper already contains intense motion; the UI should be restrained and atmospheric.
 
+<!-- ========================================================================================================================================================================================================================= -->
+
+# follow up on second image for monitor
+
+For a vertical secondary monitor, you want wallpapers that:
+
+* keep a strong silhouette in the center third
+* have negative space for widgets/Discord/browser sidebars
+* avoid visual clutter behind transparent apps
+* preserve your blue-black watercolor aesthetic
+
+You already nailed the “main cinematic wallpaper” vibe with the water-slash Musashi image. For the vertical monitor, I’d lean more atmospheric and contemplative rather than another high-action piece.
+
+These are the strongest fits I found:
+
+# Best Match (Vertical Monitor)
+
+## Blue Solitary Musashi
+
+This one is almost perfect for a portrait display:
+
+* vertical composition
+* deep cobalt atmosphere
+* huge negative space
+* painterly motion
+* fits your cyan/navy palette exactly
+
+Source collections: ([Wallpapers.com][1])
+
+This would look incredible with:
+
+* transparent terminal on lower half
+* Waybar floating top-left
+* cava/audio visualizer lower-right
+
+---
+
+# Best Atmospheric Companion
+
+## Purple-Night Musashi
+
+More subdued and introspective:
+
+* foggy violet sky
+* silhouette-heavy
+* minimal foreground clutter
+* excellent for readability
+
+This shifts your rice slightly toward:
+
+* Tokyo Night
+* Kanagawa Dragon
+* late-night rainy cyber-feudal vibe
+
+You could even rotate between this and the blue main wallpaper.
+
+---
+
+# Best Mobile/Portrait Art Style
+
+## Cyan Kimono Watercolor
+
+This is probably the closest stylistic match to your existing wallpaper.
+
+Why it works:
+
+* same watercolor texture
+* cyan fabric tones
+* sparse composition
+* soft whites preserve readability
+
+This one would pair beautifully with:
+
+* blur-heavy Hyprland
+* semi-transparent Firefox
+* rounded GTK widgets
+
+---
+
+# Best Monochrome Secondary Display
+
+## Stormcloud Musashi
+
+For a darker side monitor:
+
+Excellent if:
+
+* your primary monitor is colorful
+* secondary monitor hosts terminals/logs
+* you want less eye fatigue
+
+This lets your accent colors carry the personality instead of the wallpaper.
+
+---
+
+# Best Minimalist Vertical Option
+
+## Prayer Pose Musashi
+
+Very clean for portrait mode:
+
+This is ideal if you:
+
+* keep lots of windows on secondary
+* use Yazi/Neovim/TMUX there
+* want fewer distractions
+
+---
+
+# My Actual Recommendation
+
+## Primary (main ultrawide/landscape)
+
+Use your current water-slash wallpaper.
+
+## Secondary vertical monitor
+
+Use either:
+
+1. the blue solitary Musashi wallpaper
+2. the cyan watercolor kimono wallpaper
+
+Those two preserve:
+
+* the same emotional tone
+* same blue/cyan temperature
+* same brushwork aesthetic
+* same “wandering swordsman” energy
+
+without becoming visually repetitive.
+
+---
+
+# Theme Adjustment for Dual-Wallpaper Setup
+
+If you use the blue/purple vertical wallpapers, slightly tweak your accents:
+
+## Updated Accent Set
+
+| Role             | Hex       |
+| ---------------- | --------- |
+| Primary Accent   | `#58D6FF` |
+| Soft Accent      | `#7AA2F7` |
+| Secondary Accent | `#A78BFA` |
+| Hover            | `#89DDFF` |
+
+This lets:
+
+* cyan pull from water
+* indigo pull from sky
+* violet pull from nighttime pieces
+
+Very Kanagawa/Tokyo-Night hybrid.
+
+---
+
+# Perfect Theme Stack For This Rice
+
+If I were building this exact setup:
+
+| Component     | Theme                  |
+| ------------- | ---------------------- |
+| GTK           | Colloid Blue Dark      |
+| Qt            | Kvantum Kanagawa       |
+| Neovim        | Kanagawa Wave          |
+| Terminal      | Kitty + transparency   |
+| Firefox       | Cascade + custom cyan  |
+| Icons         | Tela Circle Blue       |
+| Cursor        | Bibata Ice             |
+| Notifications | Mako glassmorphism     |
+| Launcher      | Walker or Rofi-wayland |
+| Lockscreen    | Hyprlock blur          |
+
+---
+
+# One More Suggestion
+
+You should strongly consider:
+
+* subtle animated wallpaper
+* slow water particle effect
+* snowfall/rain shader
+
+with `mpvpaper` or `swww` transitions.
+
+Because Vagabond’s watercolor art style responds extremely well to:
+
+* gentle movement
+* blur
+* transparency
+* layered depth
+
+Especially on OLED/high-refresh displays.
+
+Useful wallpaper sources I found while searching:
+
+* Wallpapers.com Vagabond collection ([Wallpapers.com][1])
+* AlphaCoders Vagabond gallery ([Alpha Coders][2])
+* 4KWallpapers Vagabond section ([4kwallpapers.com][3])
+
+[1]: https://wallpapers.com/vagabond-manga?utm_source=chatgpt.com "[100+] Vagabond Manga Wallpapers | Wallpapers.com"
+[2]: https://alphacoders.com/vagabond-%28manga%29-wallpapers?utm_source=chatgpt.com "Vagabond (Manga) Wallpapers and Backgrounds: Free HD Download [40+]"
+[3]: https://4kwallpapers.com/vagabond?utm_source=chatgpt.com "Vagabond 4K Wallpapers"
+
