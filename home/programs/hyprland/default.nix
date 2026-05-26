@@ -15,5 +15,11 @@
 
   home.file.".config/hypr/hyprland.lua" = {
       source = ./hyprland.lua;
+      force = true;
+  };
+  home.file.".config/hypr/hyprland-config" = {
+      source = ./hyprland-config;
+      recursive = true;
+      force = true;
   };
 }
