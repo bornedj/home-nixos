@@ -1,4 +1,4 @@
-require("vars")
+require("hyprland-config.vars")
 
 -- autostart
 hl.on("hyprland.start", function ()
