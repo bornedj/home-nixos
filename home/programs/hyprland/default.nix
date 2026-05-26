@@ -6,6 +6,8 @@
   ];
   home.packages = with pkgs; [
     pipewire
+    kdePackages.qtwayland
+    libsForQt5.qt5.qtwayland
   ];
 
   services.pipewire = {
