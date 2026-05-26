@@ -50,7 +50,11 @@
   # services.displayManager.gdm.enable = true;
   # services.desktopManager.gnome.enable = true;
   environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+      enable = true;
+      xwayland.enable = true;
+      withUWSM = true;
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
