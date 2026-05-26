@@ -18,10 +18,10 @@
 
     # hyprland stuff
     hyprland.url = "github:hyprwm/Hyprland";
-    wired = {
-        url = "github:Toqozz/wired-notify";
-        inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # wired = {
+    #     url = "github:Toqozz/wired-notify";
+    #     inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs = inputs@{ nixpkgs, home-manager, ... }: {
@@ -35,12 +35,12 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            nixpkgs.overlays = [
-                inputs.wired.overlays.default
-            ];
-            home-manager.sharedModules = [
-                inputs.wired.homeManagerModules.default
-            ];
+            # nixpkgs.overlays = [
+            #     inputs.wired.overlays.default
+            # ];
+            # home-manager.sharedModules = [
+            #     inputs.wired.homeManagerModules.default
+            # ];
 
             home-manager.users.daniel = import ./home/daniel.nix;
             home-manager.extraSpecialArgs = { inherit inputs; };

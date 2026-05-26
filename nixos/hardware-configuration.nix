@@ -38,9 +38,9 @@ in
     opengl.enable = true;
     graphics = {
       enable = true;
-      package = pkgs-unstable.mesa;
-      enable32Bit = true;
-      package32 = pkgs-unstable.pkgsi686Linux.mesa;
+      # package = pkgs-unstable.mesa;
+      # enable32Bit = true;
+      # package32 = pkgs-unstable.pkgsi686Linux.mesa;
     };
 
     # nvidia setup

@@ -3,12 +3,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, lib, zen-browser, ... }:
+{ pkgs, lib, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./hyprland
     ];
 
   # Bootloader.
@@ -43,23 +44,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-  environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
-  programs.hyprland = {
-      enable = true;
-      xwayland.enable = true;
-  };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -116,16 +100,11 @@
     "widevine-cdm"
   ];
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.hack
-  ];
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
-    zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   nix.settings.trusted-users = [ "root" "daniel" ];
