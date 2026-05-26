@@ -25,16 +25,7 @@
   };
 
   outputs =
-    inputs@{ nixpkgs, home-manager, ... }:
-    let
-      system = "x86_64-linux";
-      overlays = [
-        (final: prev: {
-          hyprland = inputs.hyprland.packages.${system}.hyprland;
-          xdg-desktop-portal-hyprland = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
-        })
-      ];
-    in
+    inputs@{ nixpkgs, home-manager, hyprland, ... }:
     {
       nixosConfigurations = {
         daniel = nixpkgs.lib.nixosSystem {

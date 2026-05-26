@@ -1,17 +1,15 @@
-{ pkgs,  inputs, ... }:
+{ pkgs,  hyprland, ... }:
 
 {
   # imports = [
   #   ./wired-notify
   # ];
 
-  # wayland.windowManager.hyprland = {
-  #     enable = true;
-  #     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-  #     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-  #
-  #     # systemd.enable = true;
-  # };
+  wayland.windowManager.hyprland = {
+      enable = true;
+      package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+  };
 
   home.file.".config/hypr/hyprland.lua" = {
       source = ./hyprland.lua;
