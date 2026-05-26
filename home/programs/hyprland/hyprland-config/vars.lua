@@ -1,12 +1,11 @@
+local module = {}
 -- programs
-local terminal    = "ghostty"
-local fileManager = "dolphin"
-local menu        = "hyprlauncher"
-local browser = "zen"
-local music = "cider-2"
-local discord = "discord"
+module.terminal    = "ghostty"
+module.fileManager = "dolphin"
+module.menu        = "hyprlauncher"
+module.browser = "zen"
+module.music = "cider-2"
+module.discord = "discord"
 
 -- MAIN MOD
-local mainMod = "SUPER" -- Sets "Windows" key as main modifier
-
-
+module.mainMod = "SUPER" -- Sets "Windows" key as main modifier
