@@ -53,7 +53,6 @@
   programs.hyprland = {
       enable = true;
       xwayland.enable = true;
-      nvidiaPatches = true;
   };
 
   # Configure keymap in X11
