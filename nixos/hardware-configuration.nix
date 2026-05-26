@@ -30,24 +30,29 @@ in
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  # hyprland
-  hardware.graphics = {
+  hardware = {
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+    # hyprland
+    opengl.enable = true;
+    graphics = {
+      enable = true;
       package = pkgs-unstable.mesa;
       enable32Bit = true;
       package32 = pkgs-unstable.pkgsi686Linux.mesa;
-  };
+    };
 
-  # nvidia setup
-  hardware.graphics.enable = true;
-  services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia = {
+    # nvidia setup
+    nvidia = {
       modesetting.enable = true;
       powerManagement.enable = false;
       powerManagement.finegrained = false;
-      open = false;
+      open = true;
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
   };
+  # nvidia setup
+  services.xserver.videoDrivers = ["nvidia"];
 }
