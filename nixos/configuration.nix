@@ -75,6 +75,13 @@
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
+    extraConfig = {
+        pipewire."99-silent-bell.conf" = {
+                "context.properties" = {
+                    "module.x11.bell" = false;
+                };
+            };
+    };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -151,7 +158,6 @@
   # };
 
   # List services that you want to enable:
-
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
