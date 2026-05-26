@@ -511,3 +511,307 @@ Useful wallpaper sources I found while searching:
 [2]: https://alphacoders.com/vagabond-%28manga%29-wallpapers?utm_source=chatgpt.com "Vagabond (Manga) Wallpapers and Backgrounds: Free HD Download [40+]"
 [3]: https://4kwallpapers.com/vagabond?utm_source=chatgpt.com "Vagabond 4K Wallpapers"
 
+
+# follow up with vertical image of one piece ocean
+![one piece ocean](./one-piece-vertical-ocean-wallpaper.png)
+
+Yes — this changes the theme in a really good way.
+
+Your setup now has a much stronger identity:
+
+* **Primary monitor:** dark ink + violent water motion (Vagabond)
+* **Secondary vertical:** dreamlike open ocean + bright cyan sky (One Piece)
+
+That combination creates a really compelling balance:
+
+* intensity + calm
+* grounded + expansive
+* dark foreground + luminous ambient light
+
+The biggest shift is:
+
+> your overall palette should become more *luminous and airy*, while still preserving the deep navy base.
+
+The original palette I gave leaned very “ink samurai.”
+Now you want:
+
+* brighter cyan highlights
+* cleaner whites
+* deeper ultramarine
+* softer dark surfaces
+
+Less:
+
+* slate gray
+* muted nord
+
+More:
+
+* glowing ocean-at-noon
+
+---
+
+# Updated Theme Palette
+
+## Core Backgrounds
+
+| Role             | Hex       | Notes                     |
+| ---------------- | --------- | ------------------------- |
+| Main Background  | `#09111F` | deep ocean navy           |
+| Secondary BG     | `#0F172A` | cleaner blue-black        |
+| Surface          | `#16243A` | softened for transparency |
+| Floating Surface | `#1B3152` | subtle ocean blue         |
+
+---
+
+# Foregrounds
+
+| Role           | Hex       |
+| -------------- | --------- |
+| Primary Text   | `#F2FAFF` |
+| Secondary Text | `#C7DCEF` |
+| Muted Text     | `#89A3BA` |
+
+This is important:
+
+* your text should now feel *crisp like sunlight*
+* not muted parchment like before
+
+---
+
+# New Accent System
+
+## Primary Accent
+
+### Ocean Cyan
+
+```txt
+#4FD8FF
+```
+
+This becomes:
+
+* active workspace
+* links
+* selection
+* cursor accents
+* notification borders
+
+---
+
+## Secondary Accent
+
+### Sky Blue
+
+```txt
+#7CB7FF
+```
+
+Use for:
+
+* hover states
+* inactive highlights
+* secondary borders
+
+---
+
+## Deep Accent
+
+### Ultramarine
+
+```txt
+#244BFF
+```
+
+Inspired directly by the sky in your One Piece wallpaper.
+
+Perfect for:
+
+* gradients
+* lockscreen
+* focused windows
+
+---
+
+## Glow Accent
+
+### Tropical Ice
+
+```txt
+#A8F0FF
+```
+
+Reserved for:
+
+* active terminal cursor
+* active tab underline
+* audio visualizer
+* subtle neon touches
+
+---
+
+# What This Does Aesthetically
+
+Your rice now shifts from:
+
+## “wandering ronin”
+
+to:
+
+## “oceanic dreamscape anime workstation”
+
+Still mature.
+Still dark.
+But now much more vibrant and ethereal.
+
+---
+
+# Theme Ecosystem Changes
+
+## Neovim
+
+### BEST FIT NOW:
+
+## Tokyo Night Storm
+
+instead of Kanagawa.
+
+Why:
+
+* richer blues
+* brighter cyans
+* better contrast against transparent terminals
+* matches One Piece sky tones better
+
+Recommended overrides:
+
+```lua
+colors = {
+    bg = "#09111F",
+    bg_dark = "#0F172A",
+    cyan = "#4FD8FF",
+    blue = "#7CB7FF",
+}
+```
+
+---
+
+# Terminal Transparency
+
+You can now go slightly MORE transparent because the vertical wallpaper has huge clean areas.
+
+Recommended:
+
+```conf
+background_opacity 0.72
+```
+
+The bright sky will create gorgeous ambient lighting behind terminals.
+
+---
+
+# Hyprland Borders
+
+This setup wants:
+
+## gradients
+
+Focused:
+
+```txt
+#4FD8FF -> #244BFF
+```
+
+Inactive:
+
+```txt
+#1B3152
+```
+
+---
+
+# Waybar Styling
+
+Now you should lean:
+
+* floating
+* luminous
+* softer edges
+* slightly glassier
+
+Example:
+
+```css
+background: rgba(9,17,31,0.58);
+border: 1px solid rgba(79,216,255,0.22);
+```
+
+The old heavier dark style would now feel too oppressive.
+
+---
+
+# GTK Theme Recommendation Changes
+
+## BEST FIT NOW:
+
+### Catppuccin Macchiato Blue
+
+OR
+
+### Colloid Nord Dark Blue
+
+You now want:
+
+* slightly brighter surfaces
+* less charcoal
+* more soft-blue layering
+
+---
+
+# Firefox Theme Direction
+
+Your browser should now look like:
+
+* ocean horizon
+* bright tabs floating over dark water
+
+Recommended:
+
+```css
+Toolbar: #09111F
+Active Tab: #16243A
+Accent: #4FD8FF
+Hover: #7CB7FF
+```
+
+---
+
+# Bonus Suggestion (Strongly Recommended)
+
+This dual-monitor combo is PERFECT for:
+
+## pywal / matugen
+
+Because:
+
+* one wallpaper is dark
+* one wallpaper is bright
+* both share the same cyan-blue identity
+
+You could:
+
+* dynamically derive colors
+* then slightly override saturation manually
+
+This would make:
+
+* Discord
+* GTK
+* terminals
+* btop
+* notifications
+  all harmonize automatically.
+
+And honestly:
+this is one of the better foundations for a truly cohesive anime-inspired Linux rice I've seen.
+
