@@ -1,6 +1,9 @@
-{ pkgs, inputs, ... }:
+{ pkgs,  inputs, ... }:
 
 {
+  imports = [
+    ./wired-notify
+  ];
   home.packages = with pkgs; [
     pipewire
   ];
