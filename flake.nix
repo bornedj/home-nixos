@@ -24,29 +24,37 @@
     # };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }: {
-    nixosConfigurations = {
-      daniel = nixpkgs.lib.nixosSystem {
-        specialArgs = with inputs; { inherit zen-browser; inherit hyprland; };
-        modules = [
-          ./nixos/configuration.nix
+  outputs =
+    inputs@{ nixpkgs, home-manager, ... }:
+    let
+      system = "x86_64-linux";
+      overlays = [
+        (final: prev: {
+          hyprland = inputs.hyprland.packages.${system}.hyprland;
+          xdg-desktop-portal-hyprland = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
+        })
+      ];
+    in
+    {
+      nixosConfigurations = {
+        daniel = nixpkgs.lib.nixosSystem {
+          specialArgs = with inputs; {
+            inherit zen-browser;
+            inherit hyprland;
+          };
+          modules = [
+            ./nixos/configuration.nix
 
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
 
-            # nixpkgs.overlays = [
-            #     inputs.wired.overlays.default
-            # ];
-            # home-manager.sharedModules = [
-            #     inputs.wired.homeManagerModules.default
-            # ];
-
-            home-manager.users.daniel = import ./home/daniel.nix;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-          }
-        ];
+              home-manager.users.daniel = import ./home/daniel.nix;
+              home-manager.extraSpecialArgs = { inherit inputs; };
+            }
+          ];
+        };
       };
     };
-  };
 }
