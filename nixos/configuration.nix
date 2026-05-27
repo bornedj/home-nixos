@@ -5,10 +5,6 @@
 
 { pkgs, lib, zen-browser, ... }:
 
-let 
-    monitorsXmlContent = builtins.readFile ./monitors.xml;
-    monitorsConfig = pkgs.writeText "gdm_monitors.xml" monitorsXmlContent;
-in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -19,7 +15,7 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "daniel"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -47,18 +43,9 @@ in
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
   # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
+  # services.displayManager.gdm.enable = true;
+  # services.desktopManager.gnome.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -94,37 +81,6 @@ in
   };
 
   # try to have proper monitor config on boot
-  systemd.tmpfiles.rules = [
-    "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsConfig}"
-  ];
-  systemd.packages = [
-    (pkgs.writeTextFile {
-        name = "monitors.conf";
-        destination = "/etc/systemd/system/gdm.service.d/monitors.conf";
-        text = ''
-        [services]
-        ExecStartPre=cp ${monitorsXmlContent} /run/gdm/.config/monitors.xml
-        '';
-    })
-  ];
-  # system.activationScripts = {
-  #   gdm_config = {
-  #       deps = [ "specialfs" ];
-  #       text = ''
-  #         MONITORS_CONF_FILE=/etc/nixos/data/monitors.xml
-  #         GDM_CONF_PATH=/run/gdm/.config
-  #         if [ ! -d $GDM_CONF_PATH ]; then
-  #           mkdir -p $GDM_CONF_PATH
-  #         fi
-  #         if [ -f $MONITORS_CONF_FILE ]; then
-  #           cp -rf $MONITORS_CONF_FILE $GDM_CONF_PATH
-  #           chown gdm:gdm  $GDM_CONF_PATH/$(basename $MONITORS_CONF_FILE)
-  #           chmod 644 $GDM_CONF_PATH/$(basename $MONITORS_CONF_FILE)
-  #         fi
-  #       '';
-  #   };
-  # };
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -136,6 +92,7 @@ in
     "discord"
     "nvidia-x11"
     "nvidia-settings"
+    "nvidia-kernel-modules"
     "cider-2"
     "widevine-cdm"
   ];
@@ -146,6 +103,9 @@ in
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
     zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    ghostty
+    kitty # incase the binds are broken
+    hyprpaper
   ];
 
   nix.settings.trusted-users = [ "root" "daniel" ];
@@ -161,8 +121,15 @@ in
       localNetworkGameTransfers.openFirewall = true;
   };
 
+  # zsh
   programs.zsh.enable = true;
   environment.shells = with pkgs; [ zsh ];
+
+  # hyprland
+  services.getty.autologinUser = "daniel";
+  programs.hyprland = {
+      enable = true;
+  };
 
   # gc
   nix.gc = {

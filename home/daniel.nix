@@ -10,6 +10,7 @@
     ./programs/zsh.nix
     ./programs/nvim
     ./programs/tmux
+    ./programs/hyprland
     inputs.sops-nix.homeManagerModules.sops
   ];
   home.packages = with pkgs; [
@@ -73,12 +74,6 @@
       installVimSyntax = true;
   };
 
-  wayland.windowManager.hyprland = {
-      enable = true;
-      package = pkgs.hyprland;
-      systemd.enable = true;
-  };
-   
   # dotfiles
   home.file.".local/bin/tmux-sessionizer.sh" = {
     source = ./.local/bin/tmux-sessionizer.sh;
@@ -91,7 +86,12 @@
   home.file.".config/ghostty/config.ghostty" = {
     source = ./programs/ghostty/config.ghostty;
   };
-  home.file.".config/monitors.xml" = {
-      source = ../nixos/monitors.xml;
+  # file used for dynamic store path import of lua snippets
+  home.file.".config/nvim/hypr.lua" = {
+    text = ''
+    return {
+        hyprland_stubs = "${pkgs.hyprland}/share/hypr/stubs"
+    }
+    '';
   };
 }

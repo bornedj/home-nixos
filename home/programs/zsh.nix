@@ -47,6 +47,12 @@
             export _ZO_EXCLUDE_DIRS="dist/*"
         '';
 
+        loginExtra = ''
+            if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
+                start-hyprland
+            fi
+        '';
+
         initContent = ''
             extract_secret() {
                 sops decrypt /home/nixos/dotfiles/home/secrets/home.yaml | yq $1 | tr -d '"' | clip.exe
