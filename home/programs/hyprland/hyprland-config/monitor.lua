@@ -16,7 +16,7 @@ hl.monitor({
     output   = benq_output,
     mode     = "1920x1080@144",
     position = "-2160x0",
-    scale    = 1,
+    scale    = 1.25,
     transform = 1
 })
 
