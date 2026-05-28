@@ -14,7 +14,7 @@ hl.bind(vars.mainMod .. " + R", hl.dsp.exec_cmd(vars.menu))
 -- windows
 hl.bind(vars.mainMod .. " + X", hl.dsp.window.close())
 hl.bind(vars.mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(vars.mainMod .. " + P", hl.dsp.window.pseudo())
+hl.bind(vars.mainMod .. " + P", hl.dsp.focus({last = "workspace"}))
 -- Move focus with mainMod + vim motions
 hl.bind(vars.mainMod .. " + h",  hl.dsp.focus({ direction = "left" }))
 hl.bind(vars.mainMod .. " + l", hl.dsp.focus({ direction = "right" }))
