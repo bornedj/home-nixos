@@ -17,4 +17,8 @@
       recursive = true;
       force = true;
   };
+
+  home.file.".config/hypr/hyprpaper.conf".source = ./wallpapers/hyprpaper.conf;
+  home.file."Pictures/wallpapers/zoro-luffy-ocean.jpg".source = ./wallpapers/zoro-luffy-ocean.jpg;
+  home.file."Pictures/wallpapers/vagabond-water.jpg".source = ./wallpapers/vagabond-water.jpg;
 }
