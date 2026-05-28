@@ -1,6 +1,6 @@
-require("hyprland-config.monitor")
-require("hyprland-config.binds")
-require("hyprland-config.autostart")
+require("modules.monitor")
+require("modules.binds")
+require("modules.autostart")
 
 debug.disable_logs = false;
 debug.gl_debugging = true;

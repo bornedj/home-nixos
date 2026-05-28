@@ -1,10 +1,6 @@
 { pkgs,  inputs, ... }:
 
 {
-  # imports = [
-  #   ./wired-notify
-  # ];
-
   wayland.windowManager.hyprland = {
       enable = true;
       systemd.enable = true;
@@ -16,13 +12,8 @@
       source = ./hyprland.lua;
       force = true;
   };
-  home.file.".config/hypr/hyprland-config" = {
-      source = ./hyprland-config;
-      recursive = true;
-      force = true;
-  };
-  home.file.".config/hypr/hyprpaper.conf" = {
-      source = ./hyprland-config/hyprpaper.conf;
+  home.file.".config/hypr/modules" = {
+      source = ./modules;
       recursive = true;
       force = true;
   };

@@ -1,4 +1,4 @@
-local vars = require("hyprland-config.vars")
+local vars = require("modules.vars")
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
