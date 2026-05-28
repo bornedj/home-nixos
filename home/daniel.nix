@@ -87,10 +87,10 @@
     source = ./programs/ghostty/config.ghostty;
   };
   # file used for dynamic store path import of lua snippets
-  home.file.".config/nvim/hypr.lua" = {
+  home.file.".config/nvim/lua/hypr.lua" = {
     text = ''
     return {
-        hyprland_stubs = "${pkgs.hyprland}/share/hypr/stubs"
+        stubs = "${pkgs.hyprland}/share/hypr/stubs"
     }
     '';
   };
