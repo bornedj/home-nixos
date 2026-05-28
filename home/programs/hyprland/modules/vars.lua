@@ -11,6 +11,15 @@ module.discord = "discord"
 module.sceptre_output = "DP-6"
 module.benq_output = "DP-5"
 
+-- workspace names
+module.workspace = {
+    browser = "browser",
+    discord = "discord",
+    terminal = "terminal",
+    steam = "steam",
+    music = "music",
+}
+
 -- MAIN MOD
 module.mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
