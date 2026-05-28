@@ -15,5 +15,3 @@ module.benq_output = "DP-5"
 module.mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 return module
-
-
