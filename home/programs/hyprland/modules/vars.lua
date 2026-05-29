@@ -6,6 +6,7 @@ module.menu        = "hyprlauncher"
 module.browser = "zen"
 module.music = "cider-2"
 module.discord = "discord"
+module.steam = "steam"
 
 -- monitors
 module.sceptre_output = "DP-6"
@@ -14,9 +15,9 @@ module.benq_output = "DP-5"
 -- workspace names
 module.workspace = {
     browser = "browser",
-    discord = "discord",
+    discord = module.discord,
     terminal = "terminal",
-    steam = "steam",
+    steam = module.steam,
     music = "music",
 }
 
