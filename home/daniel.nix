@@ -11,6 +11,7 @@
     ./programs/nvim
     ./programs/tmux
     ./programs/hyprland
+    ./programs/matugen
     inputs.sops-nix.homeManagerModules.sops
   ];
   home.packages = with pkgs; [

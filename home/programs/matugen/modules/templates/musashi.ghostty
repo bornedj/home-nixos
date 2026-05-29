@@ -1,0 +1,24 @@
+# ~/.config/matugen/templates/ghostty-colors.conf
+
+background = {{colors.base00.default.hex}}
+foreground = {{colors.base05.default.hex}}
+cursor-color = {{colors.base05.default.hex}}
+minimum-contrast = 3
+
+palette = 0={{colors.base00.default.hex}}
+palette = 1={{colors.base08.default.hex}}
+palette = 2={{colors.base0B.default.hex}}
+palette = 3={{colors.base0A.default.hex}}
+palette = 4={{colors.base0D.default.hex}}
+palette = 5={{colors.base0E.default.hex}}
+palette = 6={{colors.base0C.default.hex}}
+palette = 7={{colors.base05.default.hex}}
+
+palette = 8={{colors.base03.default.hex}}
+palette = 9={{colors.base08.default.hex}}
+palette = 10={{colors.base0B.default.hex}}
+palette = 11={{colors.base0A.default.hex}}
+palette = 12={{colors.base0D.default.hex}}
+palette = 13={{colors.base0E.default.hex}}
+palette = 14={{colors.base0C.default.hex}}
+palette = 15={{colors.base07.default.hex}}

@@ -10,9 +10,4 @@
           shell-integration-features = "no-cursor";
       };
   };
-
-  home.file.".config/ghostty/themes" = {
-      source = ./themes;
-      recursive = true;
-  };
 }
