@@ -3,15 +3,14 @@ local vars = require("modules.vars")
 -- autostart
 hl.on("hyprland.start", function ()
     hl.exec_cmd("hyprpaper")
+    hl.exec_cmd(vars.terminal)
 
     -- setup the vert monitor
-    hl.dsp.focus({ workspace = 1 })
-    hl.exec_cmd(vars.browser)
-    hl.dsp.focus({ workspace = 2 })
-    hl.dsp.exec_cmd(vars.discord)
+    -- hl.exec_cmd("hyprctl [workspace name:".. vars.workspace.browser .. " silent] " .. vars.browser)
+    -- hl.exec_cmd("hyprctl [workspace name:".. vars.workspace.discord .. " silent] " .. vars.discord)
 
     -- setup horizontal
-    hl.dsp.focus(vars.sceptre_output)
-    hl.exec_cmd(vars.terminal)
+    -- hl.exec_cmd("hyprctl [workspace name:".. vars.workspace.terminal .. " silent] " .. vars.terminal)
+    -- hl.exec_cmd("hyprctl [workspace name:".. vars.workspace.steam .. " silent] " .. vars.steam)
 
 end)
