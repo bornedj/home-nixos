@@ -72,6 +72,11 @@
       enable = true;
       enableZshIntegration = true;
       installVimSyntax = true;
+      settings = {
+          theme = "Nord";
+          cursor-style = "block";
+          shell-integration-features = "no-cursor";
+      };
   };
 
   # dotfiles
@@ -82,9 +87,6 @@
   home.file.".local/bin/tmux-session-init.sh" = {
     source = ./.local/bin/tmux-session-init.sh;
     executable = true;
-  };
-  home.file.".config/ghostty/config.ghostty" = {
-    source = ./programs/ghostty/config.ghostty;
   };
   # file used for dynamic store path import of lua snippets
   home.file.".config/nvim/lua/hypr.lua" = {
