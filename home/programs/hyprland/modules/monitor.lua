@@ -74,3 +74,10 @@ hl.window_rule({match = {class = vars.browser}, workspace = vars.workspace.brows
 hl.window_rule({match = {class = "com.mitchellh.ghostty"}, workspace = vars.workspace.terminal, monitor = vars.sceptre_output})
 hl.window_rule({match = {class = "Cider"}, workspace = vars.workspace.music, monitor = vars.sceptre_output})
 hl.window_rule({match = {class = vars.discord}, workspace = vars.workspace.discord, monitor = vars.benq_output })
+hl.window_rule({
+    match = {class = "cs2"},
+    workspace = vars.workspace.steam,
+    monitor = vars.sceptre_output,
+    fullscreen = true,
+    decorate = false,
+})
