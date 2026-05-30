@@ -14,7 +14,7 @@
             vim-tmux-navigator
             resurrect
             continuum
-            nord
+            dotbar
         ];
 
         extraConfig = ''
