@@ -39,6 +39,7 @@ in
             yaml-language-server
             pyright
             nixd
+            kdePackages.qtdeclarative #qmlls
         ];
 
         plugins = with pkgs.vimPlugins; [
