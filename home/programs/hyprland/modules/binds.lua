@@ -6,15 +6,15 @@ local vars = require("modules.vars")
 -- main apps
 hl.bind(vars.mainMod .. " + T", hl.dsp.exec_cmd(vars.terminal))
 hl.bind(vars.mainMod .. " + B", hl.dsp.exec_cmd(vars.browser))
-hl.bind(vars.mainMod .. " + M", hl.dsp.exec_cmd(vars.music .. " silent"))
-hl.bind(vars.mainMod .. " + D", hl.dsp.exec_cmd(vars.discord .. " silent"))
+hl.bind(vars.mainMod .. " + M", hl.dsp.exec_cmd(vars.music))
+hl.bind(vars.mainMod .. " + D", hl.dsp.exec_cmd(vars.discord))
 hl.bind(vars.mainMod .. " + E", hl.dsp.exec_cmd(vars.fileManager))
 hl.bind(vars.mainMod .. " + R", hl.dsp.exec_cmd(vars.menu))
-hl.bind(vars.mainMod .. " + S", hl.dsp.exec_cmd(vars.steam .. " silent"))
+hl.bind(vars.mainMod .. " + S", hl.dsp.exec_cmd(vars.steam))
 
 -- windows
 hl.bind(vars.mainMod .. " + X", hl.dsp.window.close())
-hl.bind(vars.mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
+-- hl.bind(vars.mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(vars.mainMod .. " + P", hl.dsp.focus({last = "workspace"}))
 -- Move focus with mainMod + vim motions
 hl.bind(vars.mainMod .. " + h",  hl.dsp.focus({ direction = "left" }))

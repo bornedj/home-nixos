@@ -2,9 +2,9 @@ import Quickshell
 import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
+import "../" // imports the Colors file
 
 RowLayout {
-  anchors.fill: parent
   anchors.margins: 8
 
   Repeater {
@@ -24,6 +24,4 @@ RowLayout {
           }
       }
   }
-
-  Item { Layout.fillWidth: true }
 }
