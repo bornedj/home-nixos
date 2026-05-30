@@ -29,6 +29,9 @@ hl.config({
     },
     cursor = {
         default_monitor = "DP-6",
-
+    },
+    misc = {
+        disable_hyprland_logo = true,
+        disable_splash_rendering = true,
     },
 })
