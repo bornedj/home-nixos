@@ -20,7 +20,9 @@ in
         vimdiffAlias = true;
         withNodeJs = true;
 
+        # generating the colors file with matugen
         initLua = ''
+            require("colors")
             ${builtins.readFile ./set.lua}
             ${builtins.readFile ./remap.lua}
         '';
@@ -82,11 +84,6 @@ in
                 type = "lua";
                 plugin = nvim-lspconfig;
                 config = builtins.readFile ./plugins/lsp.lua;
-            }
-            {
-                type = "lua";
-                plugin = onenord-nvim;
-                config = builtins.readFile ./plugins/colors.lua;
             }
             {
                 type = "lua";
