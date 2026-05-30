@@ -1,5 +1,6 @@
 local lspconfig = require('lspconfig')
 local hypr = require("hypr")
+local qmlls_build_dir = require("qmlls_path")
 
 lspconfig.util.default_config.capabilities = vim.tbl_deep_extend(
     'force',
@@ -75,6 +76,11 @@ vim.lsp.enable('yamlls', {})
 vim.lsp.enable('dockerls', {})
 vim.lsp.enable('nixd', {})
 vim.lsp.enable('terraformls', {})
+
+vim.lsp.config('qmlls', {
+    cmd = { "qmlls --build dir " .. qmlls_build_dir.stubs }
+})
+vim.lsp.enable('qmlls')
 
 -- java crap (maliciously)
 local root_markers = { 'gradlew', '.git', 'mvnw', 'pom' }
