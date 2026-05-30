@@ -80,6 +80,8 @@
       };
   };
 
+  programs.nix-search-tv.enable = true;
+
   # dotfiles
   home.file.".local/bin/tmux-sessionizer.sh" = {
     source = ./.local/bin/tmux-sessionizer.sh;
