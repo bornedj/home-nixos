@@ -1,5 +1,7 @@
 import Quickshell
+import Quickshell.Widgets
 import Quickshell.Hyprland
+import "barwidgets"
 
 Scope {
   Variants {
@@ -8,9 +10,9 @@ Scope {
     PanelWindow {
       required property var modelData
       screen: modelData
-      color: Colors.base01
+
       // hide bar when something is fullscreened
-      visible: !Hyperland.focusedWorkspace.hasFullscreen
+      visible: !Hyprland.focusedWorkspace?.hasFullscreen
 
       anchors {
         top: true
@@ -18,13 +20,27 @@ Scope {
         right: true
       }
 
-      implicitHeight: 30
-
-      ClockWidget {
-        anchors.centerIn: parent
+      margins {
+          top: 5
+          bottom: 0
       }
 
-      Workspaces {}
+      color: "transparent"
+      implicitHeight: 30
+
+      RoundedWrapper {
+          anchors.centerIn: parent
+          ClockWidget {}
+      }
+
+      RoundedWrapper {
+          anchors {
+              left: parent.left
+              verticalCenter: parent.verticalCenter
+              leftMargin: 5
+          }
+          Workspaces {}
+      }
     }
   }
 }
