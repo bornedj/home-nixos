@@ -1,4 +1,5 @@
 import Quickshell.Widgets
+import "../"
 
 WrapperRectangle {
     color: Colors.base01

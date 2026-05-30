@@ -90,4 +90,10 @@
     }
     '';
   };
+
+  home.file.".config/nvim/lua/qmlls_path.lua".text = ''
+  return {
+        stubs = "${pkgs.kdePackages.qtdeclarative}"
+  }
+  '';
 }

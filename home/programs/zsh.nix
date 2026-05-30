@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
     programs.zsh = {
@@ -42,6 +42,7 @@
             semrel-install="npm i -D @semantic-release/gitlab @semantic-release/git @semantic-release/changelog @semantic-release/exec semantic-release";
 
             ns = "nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --scheme history";
+            source-color="matugen image ~/Pictures/wallpapers/vagabond-water.jpg --source-color-index 0 --show-colors";
         };
 
         profileExtra = ''
@@ -53,6 +54,7 @@
             if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
                 start-hyprland
             fi
+            tmux source ~/.config/tmux/tmux.conf
         '';
 
         initContent = ''
@@ -64,6 +66,7 @@
 
         sessionVariables = {
             NODE_PATH="~/.npm/bin";
+            QMLLS_BUILD_DIRS = "${pkgs.quickshell}/bin";
         };
     };
 }
