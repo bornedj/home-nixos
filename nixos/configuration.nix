@@ -3,7 +3,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, lib, zen-browser, ... }:
+{ pkgs, lib, zen-browser, matugen, ... }:
 
 {
   imports =
@@ -106,6 +106,7 @@
     ghostty
     kitty # incase the binds are broken
     hyprpaper
+    matugen.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   nix.settings.trusted-users = [ "root" "daniel" ];

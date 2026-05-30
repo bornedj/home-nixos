@@ -11,6 +11,8 @@
     ./programs/nvim
     ./programs/tmux
     ./programs/hyprland
+    ./programs/matugen
+    ./programs/ghostty
     inputs.sops-nix.homeManagerModules.sops
   ];
   home.packages = with pkgs; [
@@ -68,11 +70,7 @@
       enable = true;
   };
 
-  programs.ghostty = {
-      enable = true;
-      enableZshIntegration = true;
-      installVimSyntax = true;
-  };
+  programs.nix-search-tv.enable = true;
 
   # dotfiles
   home.file.".local/bin/tmux-sessionizer.sh" = {
@@ -82,9 +80,6 @@
   home.file.".local/bin/tmux-session-init.sh" = {
     source = ./.local/bin/tmux-session-init.sh;
     executable = true;
-  };
-  home.file.".config/ghostty/config.ghostty" = {
-    source = ./programs/ghostty/config.ghostty;
   };
   # file used for dynamic store path import of lua snippets
   home.file.".config/nvim/lua/hypr.lua" = {

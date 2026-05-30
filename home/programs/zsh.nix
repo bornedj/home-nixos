@@ -40,6 +40,8 @@
             nix-shell = "nix-shell --command $SHELL";
             semrel-test="npx semantic-release --dry-run --branch $(git branch --show-current) --no-ci --debug";
             semrel-install="npm i -D @semantic-release/gitlab @semantic-release/git @semantic-release/changelog @semantic-release/exec semantic-release";
+
+            ns = "nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --scheme history";
         };
 
         profileExtra = ''
