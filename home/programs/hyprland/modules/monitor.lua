@@ -67,7 +67,7 @@ hl.workspace_rule({
 })
 
 hl.workspace_rule({ workspace = "9", monitor = vars.sceptre_output })
-hl.workspace_rule({ workspace = "0", monitor = vars.sceptre_output })
+hl.workspace_rule({ workspace = "10", monitor = vars.sceptre_output })
 
 hl.window_rule({match = {class = vars.steam}, workspace = vars.workspace.steam, monitor = vars.sceptre_output})
 hl.window_rule({match = {class = vars.browser}, workspace = vars.workspace.browser, monitor = vars.benq_output})

@@ -13,6 +13,7 @@
     ./programs/hyprland
     ./programs/matugen
     ./programs/ghostty
+    ./programs/quickshell
     inputs.sops-nix.homeManagerModules.sops
   ];
   home.packages = with pkgs; [
