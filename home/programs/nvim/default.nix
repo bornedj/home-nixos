@@ -87,11 +87,6 @@ in
             }
             {
                 type = "lua";
-                plugin = onenord-nvim;
-                config = builtins.readFile ./plugins/colors.lua;
-            }
-            {
-                type = "lua";
                 plugin = comment-nvim;
                 config = builtins.readFile ./plugins/comment.lua;
             }

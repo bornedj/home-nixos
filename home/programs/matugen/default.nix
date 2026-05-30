@@ -17,10 +17,10 @@
             };
             nvim = {
                 input_path = ./modules/templates/colors.lua;
-                output_path = "lua/colors.lua";
+                output_path = "~/.config/colors.lua";
             };
         };
     };
     home.file.".config/ghostty/themes/musashi".source = "${config.programs.matugen.theme.files}/.config/ghostty/themes/musashi";
-    home.file.".config/nvim/lua/colors.lua".source = "${config.programs.matugen.theme.files}/lua/colors.lua";
+    home.file.".config/nvim/lua/colors.lua".source = "${config.programs.matugen.theme.files}/.config/colors.lua";
 }
