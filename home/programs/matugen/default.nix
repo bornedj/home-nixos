@@ -12,11 +12,11 @@
 
         templates = {
             ghostty = {
-                input_path = ./modules/templates/musashi;
+                input_path = ./templates/musashi;
                 output_path = "~/.config/ghostty/themes/musashi";
             };
             nvim = {
-                input_path = ./modules/templates/colors.lua;
+                input_path = ./templates/colors.lua;
                 output_path = "~/.config/colors.lua";
             };
         };
