@@ -1,5 +1,0 @@
-[config]
-
-[templates.ghostty]
-input_path ~/.config/matugen/templates/musashi.ghostty
-output_path ~/.config/ghsotty/themes/musashi.ghostty
