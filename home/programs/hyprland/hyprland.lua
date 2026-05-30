@@ -17,8 +17,8 @@ hl.config({
         layout = "scrolling",
     },
     decoration = {
-        rounding = 20,
-        rounding_power = 10,
+        rounding = 12,
+        rounding_power = 7,
         active_opacity = 0.8,
         inactive_opacity = 0.8,
         fullscreen_opacity = 0.8,

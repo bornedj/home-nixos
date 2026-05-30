@@ -22,7 +22,7 @@ in
 
         # generating the colors file with matugen
         initLua = ''
-            require("matugen")
+            require("colors")
             ${builtins.readFile ./set.lua}
             ${builtins.readFile ./remap.lua}
         '';
