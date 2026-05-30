@@ -12,10 +12,10 @@
 
         templates = {
             ghostty = {
-                input_path = ./modules/templates/musashi.ghostty;
-                output_path = "~/.config/ghostty/themes/musashi.ghostty";
+                input_path = ./modules/templates/musashi;
+                output_path = "~/.config/ghostty/themes/musashi";
             };
         };
     };
-    home.file.".config/ghostty/themes/musashi.ghostty".source = "${config.programs.matugen.theme.files}/.config/ghostty/themes/musashi.ghostty";
+    home.file.".config/ghostty/themes/musashi".source = "${config.programs.matugen.theme.files}/.config/ghostty/themes/musashi";
 }
