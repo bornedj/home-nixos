@@ -12,6 +12,7 @@
     ./programs/tmux
     ./programs/hyprland
     ./programs/matugen
+    ./programs/ghostty
     inputs.sops-nix.homeManagerModules.sops
   ];
   home.packages = with pkgs; [
@@ -67,17 +68,6 @@
 
   programs.discord = {
       enable = true;
-  };
-
-  programs.ghostty = {
-      enable = true;
-      enableZshIntegration = true;
-      installVimSyntax = true;
-      settings = {
-          theme = "Nord";
-          cursor-style = "block";
-          shell-integration-features = "no-cursor";
-      };
   };
 
   programs.nix-search-tv.enable = true;
