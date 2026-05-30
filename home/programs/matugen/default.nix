@@ -23,9 +23,14 @@
                 input_path = ./templates/statusbar.conf;
                 output_path = "~/.config/statusbar.conf";
             };
+            quickshell = {
+                input_path = ./templates/Colors.qml;
+                output_path = "~/.config/Colors.qml";
+            };
         };
     };
     home.file.".config/ghostty/themes/musashi".source = "${config.programs.matugen.theme.files}/.config/ghostty/themes/musashi";
     home.file.".config/nvim/lua/colors.lua".source = "${config.programs.matugen.theme.files}/.config/colors.lua";
     home.file.".config/tmux/statusbar.conf".source = "${config.programs.matugen.theme.files}/.config/statusbar.conf";
+    home.file.".config/quickshell/modules/Colors.qml".source = "${config.programs.matugen.theme.files}/.config/Colors.qml";
 }

@@ -49,7 +49,7 @@ vim.lsp.enable('rust_analyzer', {
         }
     }
 })
-vim.lsp.enable('lua_ls', {
+vim.lsp.config('lua_ls', {
     settings = {
         workspace = {
             library = {
@@ -59,6 +59,7 @@ vim.lsp.enable('lua_ls', {
         }
     }
 })
+vim.lsp.enable('lua_ls')
 vim.lsp.enable('angularls', {})
 vim.lsp.enable('cssls', {})
 vim.lsp.config('emmet_ls', {

@@ -19,16 +19,21 @@
       url = "github:/InioX/Matugen";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    quickshell = {
+        url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    inputs@{ nixpkgs, home-manager, matugen, ... }:
+    inputs@{ nixpkgs, home-manager, matugen, quickshell, ... }:
     {
       nixosConfigurations = {
         daniel = nixpkgs.lib.nixosSystem {
           specialArgs = with inputs; {
             inherit zen-browser;
             inherit matugen;
+            inherit quickshell;
           };
           modules = [
             ./nixos/configuration.nix
