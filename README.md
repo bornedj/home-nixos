@@ -15,4 +15,7 @@ This flake is my home setup for hyprland on nixos
 - [ ] setup screenshotting
 - [ ] volume controls
 - [ ] matugen setup
+    - [x] nvim
+    - [x] ghostty
+    - [ ] debug the source color index issue
 - [ ] application launcher
