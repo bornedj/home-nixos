@@ -20,7 +20,9 @@ in
         vimdiffAlias = true;
         withNodeJs = true;
 
+        # generating the colors file with matugen
         initLua = ''
+            require("matugen")
             ${builtins.readFile ./set.lua}
             ${builtins.readFile ./remap.lua}
         '';
