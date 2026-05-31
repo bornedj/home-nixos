@@ -5,6 +5,7 @@
         enable = true;
         configs = {
             "shell.qml" = ./shell.qml;
+            "Colors.qml" = ./Colors.qml;
         };
     };
 

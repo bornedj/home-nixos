@@ -27,13 +27,13 @@
                 post_hook = "tmux source ~/.config/tmux/tmux.conf";
             };
             quickshell = {
-                input_path = ./templates/Colors.qml;
-                output_path = "~/.config/Colors.qml";
+                input_path = ./templates/quickshell.json;
+                output_path = "~/.config/quickshell.json";
             };
         };
     };
     home.file.".config/ghostty/themes/musashi".source = "${config.programs.matugen.theme.files}/.config/ghostty/themes/musashi";
     home.file.".config/nvim/lua/matugen.lua".source = "${config.programs.matugen.theme.files}/.config/matugen.lua";
     home.file.".config/tmux/statusbar.conf".source = "${config.programs.matugen.theme.files}/.config/statusbar.conf";
-    home.file.".config/quickshell/Colors.qml".source = "${config.programs.matugen.theme.files}/.config/Colors.qml";
+    home.file.".local/state/quickshell/generated/colors.json".source = "${config.programs.matugen.theme.files}/.config/quickshell.json";
 }
