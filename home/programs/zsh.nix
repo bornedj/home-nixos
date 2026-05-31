@@ -42,7 +42,7 @@
             semrel-install="npm i -D @semantic-release/gitlab @semantic-release/git @semantic-release/changelog @semantic-release/exec semantic-release";
 
             ns = "nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --scheme history";
-            source-color="matugen image ~/Pictures/wallpapers/vagabond-water.jpg --source-color-index 0 --show-colors";
+            source-color="matugen image ~/Pictures/wallpapers/vagabond-water.jpg --source-color-index 1 --show-colors";
         };
 
         profileExtra = ''
