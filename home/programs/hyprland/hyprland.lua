@@ -33,6 +33,6 @@ hl.config({
     misc = {
         disable_hyprland_logo = true,
         disable_splash_rendering = true,
-        font_family = "Mono Mable"
+        font_family = "Mono Mable NF"
     },
 })
