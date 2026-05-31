@@ -1,6 +1,7 @@
 require("modules.monitor")
 require("modules.binds")
 require("modules.autostart")
+local colors = require("modules.colors")
 
 debug.disable_logs = false;
 debug.gl_debugging = true;
@@ -15,6 +16,10 @@ hl.config({
         gaps_in = 5,
         gaps_out = 7,
         layout = "scrolling",
+        col = {
+            inactive_border = colors.base16.base04,
+            active_border = colors.base16.base00,
+        }
     },
     decoration = {
         rounding = 12,

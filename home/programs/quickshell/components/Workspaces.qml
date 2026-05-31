@@ -2,7 +2,7 @@ import Quickshell
 import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
-import "../" // imports the Colors file
+import "../"
 
 RowLayout {
   anchors.margins: 8
@@ -15,7 +15,7 @@ RowLayout {
           property var isActive: Hyprland.focusedWorkspace?.id == (index + 1)
 
           text: index + 1
-          color: isActive ? Colors.base0c : (ws ? Colors.base0d : Colors.base0a)
+          color: isActive ? Colors.md3.tertiary : (ws ? Colors.md3.primary : Colors.base16.base05)
           font { pixelSize: 14; bold: true }
 
           MouseArea {

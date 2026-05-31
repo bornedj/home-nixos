@@ -14,24 +14,31 @@
             ghostty = {
                 input_path = ./templates/musashi;
                 output_path = "~/.config/ghostty/themes/musashi";
+                post_hook = "pkill -SIGUSR2 ghostty";
             };
             nvim = {
-                input_path = ./templates/colors.lua;
-                output_path = "~/.config/colors.lua";
+                input_path = ./templates/nvim-colors.lua;
+                output_path = "~/.config/matugen.lua";
+                post_hook = "pkill -SIGUSR1 nvim";
             };
-            dotbar = {
-                input_path = ./templates/statusbar.conf;
-                output_path = "~/.config/statusbar.conf";
-                post_hook = "tmux source ~/.config/tmux/tmux.conf";
+            tmux = {
+                input_path = ./templates/tmux-colors.conf;
+                output_path = "~/.config/tmux-colors.conf";
+                post_hook = "tmux source ~/.config/tmux/tmux-colors.conf";
             };
             quickshell = {
-                input_path = ./templates/Colors.qml;
-                output_path = "~/.config/Colors.qml";
+                input_path = ./templates/quickshell.json;
+                output_path = "~/.config/quickshell.json";
+            };
+            hyprland = {
+                input_path = ./templates/hyprland.lua;
+                output_path = "~/.config/hyprland.lua";
             };
         };
     };
     home.file.".config/ghostty/themes/musashi".source = "${config.programs.matugen.theme.files}/.config/ghostty/themes/musashi";
-    home.file.".config/nvim/lua/colors.lua".source = "${config.programs.matugen.theme.files}/.config/colors.lua";
-    home.file.".config/tmux/statusbar.conf".source = "${config.programs.matugen.theme.files}/.config/statusbar.conf";
-    home.file.".config/quickshell/Colors.qml".source = "${config.programs.matugen.theme.files}/.config/Colors.qml";
+    home.file.".config/nvim/lua/matugen.lua".source = "${config.programs.matugen.theme.files}/.config/matugen.lua";
+    home.file.".config/tmux/tmux-colors.conf".source = "${config.programs.matugen.theme.files}/.config/tmux-colors.conf";
+    home.file.".local/state/quickshell/generated/colors.json".source = "${config.programs.matugen.theme.files}/.config/quickshell.json";
+    home.file.".config/hypr/modules/colors.lua".source = "${config.programs.matugen.theme.files}/.config/hyprland.lua";
 }

@@ -22,9 +22,10 @@ in
 
         # generating the colors file with matugen
         initLua = ''
-            require("colors")
+            require("matugen")
             ${builtins.readFile ./set.lua}
             ${builtins.readFile ./remap.lua}
+            ${builtins.readFile ./plugins/colorscheme.lua}
         '';
 
         extraPackages = with pkgs; [
@@ -43,6 +44,7 @@ in
         ];
 
         plugins = with pkgs.vimPlugins; [
+            base16-nvim
             plenary-nvim
             trouble-nvim
             vim-tmux-navigator

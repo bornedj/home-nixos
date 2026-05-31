@@ -1,9 +1,9 @@
 import QtQuick
 import QtQuick
 import QtQuick.Layouts
-import "../"
 import "../services"
 import "../containers"
+import "../"
 
 RowLayout {
     anchors {
@@ -15,7 +15,7 @@ RowLayout {
     RoundedWrapper {
         Text {
             text: "CPU: " + Cpu.usage + "%"
-            color: Colors.base04
+            color: Colors.base16.base05
             font {
                 bold: true
                 pixelSize: 14
@@ -26,7 +26,7 @@ RowLayout {
     RoundedWrapper {
         Text {
             text: "GPU: " + Gpu.usage
-            color: Colors.base0c
+            color: Colors.md3.primary
             font {
                 bold: true
                 pixelSize: 14
@@ -37,7 +37,7 @@ RowLayout {
     RoundedWrapper {
         Text {
             text: "Mem: " + Mem.usage + "%"
-            color: Colors.base0e
+            color: Colors.md3.tertiary
             font {
                 bold: true
                 pixelSize: 14
