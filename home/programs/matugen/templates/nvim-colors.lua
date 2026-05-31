@@ -1,21 +1,21 @@
 require('base16-colorscheme').setup({
-  base00 = "{{colors.background.default.hex}}",
-  base01 = "{{colors.surface_container_lowest.default.hex}}",
-  base02 = "{{colors.surface_container_low.default.hex}}",
-  base03 = "{{colors.outline_variant.default.hex}}",
-  base04 = "{{colors.on_surface_variant.default.hex}}",
-  base05 = "{{colors.on_surface.default.hex}}",
-  base06 = "{{colors.inverse_on_surface.default.hex}}",
-  base07 = "{{colors.surface_bright.default.hex}}",
+  base00 = "{{base16.base00.default.hex}}",
+  base01 = "{{base16.base01.default.hex}}",
+  base02 = "{{base16.base02.default.hex}}",
+  base03 = "{{base16.base03.default.hex}}",
+  base04 = "{{base16.base04.default.hex}}",
+  base05 = "{{base16.base05.default.hex}}",
+  base06 = "{{base16.base06.default.hex}}",
+  base07 = "{{base16.base07.default.hex}}",
 
-  base08 = "{{colors.tertiary.default.hex | lighten: -5}}",
-  base09 = "{{colors.tertiary.default.hex}}",
-  base0A = "{{colors.secondary.default.hex}}",
-  base0B = "{{colors.primary.default.hex}}",
-  base0C = "{{colors.tertiary_container.default.hex}}",
-  base0D = "{{colors.primary_container.default.hex}}",
-  base0E = "{{colors.secondary_container.default.hex}}",
-  base0F = "{{colors.secondary.default.hex | lighten: -10}}",
+  base08 = "{{base16.base08.default.hex}}",
+  base09 = "{{base16.base09.default.hex}}",
+  base0A = "{{base16.base0a.default.hex}}",
+  base0B = "{{base16.base0b.default.hex}}",
+  base0C = "{{base16.base0c.default.hex}}",
+  base0D = "{{base16.base0d.default.hex}}",
+  base0E = "{{base16.base0e.default.hex}}",
+  base0F = "{{base16.base0f.default.hex}}",
 })
 
 -- We first theme base16, but we also need to fix some other colors that don't
@@ -36,12 +36,13 @@ vim.api.nvim_set_hl(0, 'Visual', {
 
 -- Make "string" text contrast better
 set_hl_mutliple({ 'String', 'TSString' }, {
-  fg = '{{colors.tertiary.default.hex | lighten: -15.0 }}',
+  bg = '{{colors.tertiary.default.hex}}',
+  fg = '{{colors.tertiary.default.hex}}',
 })
 
 -- Grey out comments
 set_hl_mutliple({ 'TSComment', 'Comment' }, {
-  fg = '{{colors.outline.default.hex}}',
+  fg = '{{base16.base03.default.hex}}',
   italic = true,
 })
 
@@ -52,7 +53,7 @@ set_hl_mutliple({ 'TSMethod', 'Method' }, {
 })
 
 set_hl_mutliple({ 'TSFunction', 'Function' }, {
-  fg = '{{colors.secondary.default.hex}}',
+  fg = '{{colors.primary.default.hex}}',
 })
 
 set_hl_mutliple({ 'Keyword', 'TSKeyword', 'TSKeywordFunction', 'TSRepeat' }, {
@@ -63,7 +64,7 @@ vim.cmd("highlight clear")
 
 -- transparent backgrounds
 set_hl_mutliple({ "Normal", "NormalFloat", "SignColumn"}, {
-    fg = "{{colors.on_surface.default.hex}}",
+    fg = "{{base16.base05.default.hex}}",
     bg = "none"
 })
 
