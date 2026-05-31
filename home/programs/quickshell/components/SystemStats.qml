@@ -15,7 +15,7 @@ RowLayout {
     RoundedWrapper {
         Text {
             text: "CPU: " + Cpu.usage + "%"
-            color: Colors.md3.on_surface_variant
+            color: Colors.base16.base05
             font {
                 bold: true
                 pixelSize: 14
@@ -26,7 +26,7 @@ RowLayout {
     RoundedWrapper {
         Text {
             text: "GPU: " + Gpu.usage
-            color: Colors.md3.on_surface
+            color: Colors.md3.primary
             font {
                 bold: true
                 pixelSize: 14
@@ -37,7 +37,7 @@ RowLayout {
     RoundedWrapper {
         Text {
             text: "Mem: " + Mem.usage + "%"
-            color: Colors.md3.surface_tint
+            color: Colors.md3.tertiary
             font {
                 bold: true
                 pixelSize: 14

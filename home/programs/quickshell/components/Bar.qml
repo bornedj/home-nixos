@@ -35,7 +35,7 @@ Scope {
                 anchors.centerIn: parent
                 Text {
                     text: Time.time
-                    color: Colors.md3.on_surface
+                    color: Colors.md3.primary
                     font {
                         bold: true
                         pixelSize: 14
