@@ -30,10 +30,15 @@
                 input_path = ./templates/quickshell.json;
                 output_path = "~/.config/quickshell.json";
             };
+            hyprland = {
+                input_path = ./templates/hyprland.lua;
+                output_path = "~/.config/hyprland.lua";
+            };
         };
     };
     home.file.".config/ghostty/themes/musashi".source = "${config.programs.matugen.theme.files}/.config/ghostty/themes/musashi";
     home.file.".config/nvim/lua/matugen.lua".source = "${config.programs.matugen.theme.files}/.config/matugen.lua";
     home.file.".config/tmux/tmux-colors.conf".source = "${config.programs.matugen.theme.files}/.config/tmux-colors.conf";
     home.file.".local/state/quickshell/generated/colors.json".source = "${config.programs.matugen.theme.files}/.config/quickshell.json";
+    home.file.".config/hyprland/modules/colors.lua".source = "${config.programs.matugen.theme.files}/.config/hyprland.lua";
 }
