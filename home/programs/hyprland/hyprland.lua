@@ -17,7 +17,7 @@ hl.config({
         gaps_out = 7,
         layout = "scrolling",
         col = {
-            inactive_border = colors.base16.base01,
+            inactive_border = colors.base16.base04,
             active_border = colors.base16.base00,
         }
     },

@@ -40,5 +40,5 @@
     home.file.".config/nvim/lua/matugen.lua".source = "${config.programs.matugen.theme.files}/.config/matugen.lua";
     home.file.".config/tmux/tmux-colors.conf".source = "${config.programs.matugen.theme.files}/.config/tmux-colors.conf";
     home.file.".local/state/quickshell/generated/colors.json".source = "${config.programs.matugen.theme.files}/.config/quickshell.json";
-    home.file.".config/hyprland/modules/colors.lua".source = "${config.programs.matugen.theme.files}/.config/hyprland.lua";
+    home.file.".config/hypr/modules/colors.lua".source = "${config.programs.matugen.theme.files}/.config/hyprland.lua";
 }
