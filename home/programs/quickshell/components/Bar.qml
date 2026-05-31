@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
 import Quickshell.Hyprland
@@ -11,6 +12,7 @@ Scope {
         model: Quickshell.screens
 
         PanelWindow {
+            id: bar
             required property var modelData
             screen: modelData
 
@@ -43,16 +45,53 @@ Scope {
                 }
             }
 
-            RoundedWrapper {
+            RowLayout {
                 anchors {
                     left: parent.left
                     verticalCenter: parent.verticalCenter
                     leftMargin: 7
                 }
-                Workspaces {}
+                RoundedWrapper {
+                    Workspaces {}
+                }
+
+                PowerButton { id: powerButton }
             }
 
+
             SystemStats {}
+
+            PopupWindow {
+                anchor.window: bar
+                anchor.rect.x: powerButton.x + 7 // margin
+                anchor.rect.y: bar.implicitHeight - 2 // overlap with original button
+                implicitHeight: powerButton.implicitHeight * 2
+                implicitWidth: powerButton.implicitWidth
+                visible: powerButton.isPowerMenuOpen
+                color: "transparent"
+
+                Rectangle {
+                    color: Colors.base16.base00
+                    opacity: 0.85
+                    height: parent.height
+                    width: parent.width
+                    topLeftRadius: 0
+                    topRightRadius: 0
+                    bottomLeftRadius: 12
+                    bottomRightRadius: 12
+
+                    Column {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        Repeater {
+                            model: [ "../assets/power.svg", "../assets/power.svg", "../assets/power.svg"]
+                            Image {
+                                source: modelData
+                                fillMode: Image.PreserveAspectCrop
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
