@@ -132,6 +132,9 @@
   programs.hyprland = {
       enable = true;
   };
+  fonts.packages = with pkgs; [
+    maple-mono.NF-unhinted
+  ];
 
   # gc
   nix.gc = {
