@@ -43,3 +43,11 @@ hl.bind(vars.mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true }
 
 -- quit
 hl.bind(vars.mainMod .. " + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+
+-- screenshot
+hl.bind("code:107", function ()
+    local monitor = hl.get_active_monitor()
+    local filename = os.date("%Y-%m-%d_%H-%M-%S") .. ".png"
+    local path = os.getenv("HOME") .. "/Pictures/screenshots/" .. filename
+    hl.exec_cmd("mkdir -p ~/Pictures/screenshots && grim -o " .. monitor.name .. " " .. path)
+end)
