@@ -42,6 +42,7 @@
     
     # music
     cider-2
+    grim
   ];
 
   programs.git = {
