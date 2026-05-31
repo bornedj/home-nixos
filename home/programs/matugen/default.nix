@@ -8,7 +8,7 @@
         variant = "dark";
         wallpaper = ./../hyprland/wallpapers/vagabond-water.jpg;
         jsonFormat = "hex";
-        source_color_index = 0;
+        source_color_index = 1;
 
         templates = {
             ghostty = {
