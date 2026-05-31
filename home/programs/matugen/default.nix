@@ -8,7 +8,7 @@
         variant = "dark";
         wallpaper = ./../hyprland/wallpapers/vagabond-water.jpg;
         jsonFormat = "hex";
-        source_color_index = 1;
+        source_color_index = 0;
 
         templates = {
             ghostty = {
@@ -16,8 +16,9 @@
                 output_path = "~/.config/ghostty/themes/musashi";
             };
             nvim = {
-                input_path = ./templates/colors.lua;
-                output_path = "~/.config/colors.lua";
+                input_path = ./templates/nvim-colors.lua;
+                output_path = "~/.config/matugen.lua";
+                post_hook = "pkill -SIGUSR1 nvim";
             };
             dotbar = {
                 input_path = ./templates/statusbar.conf;
@@ -31,7 +32,7 @@
         };
     };
     home.file.".config/ghostty/themes/musashi".source = "${config.programs.matugen.theme.files}/.config/ghostty/themes/musashi";
-    home.file.".config/nvim/lua/colors.lua".source = "${config.programs.matugen.theme.files}/.config/colors.lua";
+    home.file.".config/nvim/lua/matugen.lua".source = "${config.programs.matugen.theme.files}/.config/matugen.lua";
     home.file.".config/tmux/statusbar.conf".source = "${config.programs.matugen.theme.files}/.config/statusbar.conf";
     home.file.".config/quickshell/Colors.qml".source = "${config.programs.matugen.theme.files}/.config/Colors.qml";
 }
