@@ -8,12 +8,13 @@
         variant = "dark";
         wallpaper = ./../hyprland/wallpapers/vagabond-water.jpg;
         jsonFormat = "hex";
-        source_color_index = 0;
+        source_color_index = 1;
 
         templates = {
             ghostty = {
                 input_path = ./templates/musashi;
                 output_path = "~/.config/ghostty/themes/musashi";
+                post_hook = "pkill -SIGUSR2 ghostty";
             };
             nvim = {
                 input_path = ./templates/nvim-colors.lua;
