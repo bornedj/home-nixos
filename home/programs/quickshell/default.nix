@@ -24,6 +24,11 @@
         recursive = true;
     };
 
+    home.file.".config/quickshell/assets" = {
+        source = ./assets;
+        recursive = true;
+    };
+
     # this is the build location, so running qs
     # generates the needed lsp information
     # then it needs to be symlinked to in the repo
