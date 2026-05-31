@@ -1,5 +1,5 @@
 {
-  description = "Daniel's home operating system flake";
+  description = "Hyprland with quickshell on nix, btw";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";

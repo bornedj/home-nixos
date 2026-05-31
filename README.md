@@ -9,13 +9,24 @@ This flake is my home setup for hyprland on nixos
 - Matugen - dynamic theming from images
 
 ## TODO
-- [ ] build first component with quickshell - status bar
-- [ ] adjust my autostart to launch programs in the correct workspaces
+- [ ] status bar
+    - [x] cpu util
+    - [x] gpu util
+    - [x] mem util
+    - [x] clock
+    - [x] workspace selector
+    - [ ] power icon with drawer
+    - [ ] newtork
+    - [ ] volume controls
 - [ ] setup screensharing
-- [ ] setup screenshotting
-- [ ] volume controls
-- [ ] matugen setup
+- [x] setup screenshotting
+- [x] matugen setup
     - [x] nvim
     - [x] ghostty
-    - [ ] debug the source color index issue
+    - [x] hyprland
+    - [x] tmux
+    - [x] quickshell
 - [ ] application launcher
+- [ ] window fuzzy finder
+- [ ] workspace manager - SUPER tab on windows
+- [ ] file explorer
