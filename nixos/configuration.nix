@@ -108,6 +108,7 @@
     hyprpaper
     matugen.packages.${pkgs.stdenv.hostPlatform.system}.default
     quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
+    fd
   ];
 
   nix.settings.trusted-users = [ "root" "daniel" ];
