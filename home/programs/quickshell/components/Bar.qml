@@ -55,7 +55,7 @@ Scope {
                 PowerButton { id: powerButton }
 
                 RoundedWrapper {
-                    Workspaces {}
+                    Workspaces { id: workspaces }
                 }
             }
 
@@ -65,9 +65,9 @@ Scope {
             PopupWindow {
                 anchor.window: bar
                 anchor.rect.x: powerButton.x + 7 // margin
-                anchor.rect.y: bar.implicitHeight - 2 // overlap with original button
+                anchor.rect.y: bar.implicitHeight
                 implicitHeight: powerButton.implicitHeight * 2
-                implicitWidth: powerButton.implicitWidth
+                implicitWidth: powerButton.implicitWidth + workspaces.implicitWidth
                 visible: powerButton.isPowerMenuOpen
                 color: "transparent"
 
@@ -80,14 +80,48 @@ Scope {
                     bottomLeftRadius: 12
                     bottomRightRadius: 12
 
-                    Column {
+                    ColumnLayout {
                         anchors.horizontalCenter: parent.horizontalCenter
-                        Repeater {
-                            model: [ "../assets/power.svg", "../assets/power.svg"]
+
+                        RowLayout {
+                            Text { 
+                                font {
+                                    pixelSize: 14
+                                    family: "Maple Mono NF"
+                                    bold: true
+                                }
+                                color: Colors.md3.primary
+                                text: "Restart"
+                            }
                             Image {
-                                source: modelData
+                                source: "../assets/power.svg"
                                 fillMode: Image.PreserveAspectCrop
                                 scale: 0.8
+                            }
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: console.log("Restart")
+                            }
+                        }
+
+                        RowLayout {
+                            Text { 
+                                font {
+                                    pixelSize: 14
+                                    family: "Maple Mono NF"
+                                    bold: true
+                                }
+                                color: Colors.md3.tertiary
+                                text: "Shutdown"
+                            }
+                            Image {
+                                source: "../assets/power.svg"
+                                fillMode: Image.PreserveAspectCrop
+                                scale: 0.8
+                            }
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: console.log("Shutdown")
                             }
                         }
                     }
