@@ -46,6 +46,8 @@ Scope {
             }
 
             RowLayout {
+                PowerButton { id: powerButton }
+
                 anchors {
                     left: parent.left
                     verticalCenter: parent.verticalCenter
@@ -54,8 +56,6 @@ Scope {
                 RoundedWrapper {
                     Workspaces {}
                 }
-
-                PowerButton { id: powerButton }
             }
 
 
