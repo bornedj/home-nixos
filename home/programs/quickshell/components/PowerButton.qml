@@ -15,7 +15,7 @@ WrapperRectangle {
     bottomLeftRadius: isPowerMenuOpen ? 0 : 12
     bottomRightRadius: isPowerMenuOpen ? 0 : 12
     
-    margin: 8
+    margin: 5
 
     Image {
         source: "../assets/power.svg"
