@@ -46,13 +46,14 @@ Scope {
             }
 
             RowLayout {
-                PowerButton { id: powerButton }
-
                 anchors {
                     left: parent.left
                     verticalCenter: parent.verticalCenter
                     leftMargin: 7
                 }
+
+                PowerButton { id: powerButton }
+
                 RoundedWrapper {
                     Workspaces {}
                 }
@@ -71,8 +72,7 @@ Scope {
                 color: "transparent"
 
                 Rectangle {
-                    color: Colors.base16.base00
-                    opacity: 0.85
+                    color: Colors.base16.base01
                     height: parent.height
                     width: parent.width
                     topLeftRadius: 0
@@ -83,10 +83,11 @@ Scope {
                     Column {
                         anchors.horizontalCenter: parent.horizontalCenter
                         Repeater {
-                            model: [ "../assets/power.svg", "../assets/power.svg", "../assets/power.svg"]
+                            model: [ "../assets/power.svg", "../assets/power.svg"]
                             Image {
                                 source: modelData
                                 fillMode: Image.PreserveAspectCrop
+                                scale: 0.8
                             }
                         }
                     }
