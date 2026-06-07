@@ -14,6 +14,7 @@
     ./programs/matugen
     ./programs/ghostty
     ./programs/quickshell
+    ./programs/steam
     inputs.sops-nix.homeManagerModules.sops
   ];
   home.packages = with pkgs; [
