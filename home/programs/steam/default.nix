@@ -1,8 +1,8 @@
 { ... }:
 
 {
-    home.file.".local/share/Steam/Steamapps/common/Counter-Strike Global Offensive/game/csgo/cfg/config.cfg" = {
+    home.file.".local/share/Steam/Steamapps/common/Counter-Strike Global Offensive/game/csgo/cfg/autoexec.cfg" = {
         force = true;
-        source = ./counterstrike/config.cfg;
+        source = ./counterstrike/autoexec.cfg;
     };
 }
