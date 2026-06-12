@@ -109,6 +109,7 @@
     matugen.packages.${pkgs.stdenv.hostPlatform.system}.default
     quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
     fd
+    pavucontrol
   ];
 
   nix.settings.trusted-users = [ "root" "daniel" ];
