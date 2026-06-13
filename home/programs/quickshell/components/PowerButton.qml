@@ -18,7 +18,7 @@ WrapperRectangle {
     margin: 5
 
     Image {
-        source: "../assets/power.svg"
+        source: "../assets/power-tray.svg"
         fillMode: Image.PreserveAspectCrop
         scale: 0.8
 
