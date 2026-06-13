@@ -91,10 +91,10 @@ Scope {
                                     bold: true
                                 }
                                 color: Colors.md3.primary
-                                text: "Restart"
+                                text: "Restart "
                             }
                             Image {
-                                source: "../assets/power.svg"
+                                source: "../assets/restart.svg"
                                 fillMode: Image.PreserveAspectCrop
                                 scale: 0.8
                             }
