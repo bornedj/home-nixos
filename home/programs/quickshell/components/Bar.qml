@@ -100,7 +100,7 @@ Scope {
                             }
                             MouseArea {
                                 anchors.fill: parent
-                                onClicked: console.log("Restart")
+                                onClicked: Hyprland.dispatch(`hl.exec_cmd("reboot")`)
                             }
                         }
 
@@ -121,7 +121,7 @@ Scope {
                             }
                             MouseArea {
                                 anchors.fill: parent
-                                onClicked: console.log("Shutdown")
+                                onClicked: Hyprland.dispatch(`hl.exec_cmd("shutdown now")`)
                             }
                         }
                     }
