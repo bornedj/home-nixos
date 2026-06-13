@@ -10,7 +10,7 @@ hl.monitor({
 -- benq horizontal
 hl.monitor({
     output    = vars.benq_output,
-    mode      = "1920x1080@144",
+    mode      = "1920x1080@60",
     position  = "-2160x0",
     scale     = 1,
     transform = 1
