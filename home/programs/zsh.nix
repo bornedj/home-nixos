@@ -62,6 +62,7 @@
                 sops decrypt /home/nixos/dotfiles/home/secrets/home.yaml | yq $1 | tr -d '"' | clip.exe
             }
             eval "$(zoxide init zsh)"
+            source <(sops completion zsh)>
         '';
 
         sessionVariables = {
