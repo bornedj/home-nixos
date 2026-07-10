@@ -1,0 +1,18 @@
+steam:
+    recovery_codes:
+        read_wha: ENC[AES256_GCM,data:OPyG5BWr,iv:lMzc+idyPiXd6wFUBxHjUfTyICztdJdzn6iYU7MCZSU=,tag:+qYal9nnpR57IdFLoZi4cA==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBieUVoTHdyTVE4NWNTMkFY
+            M3hCUGw3WEtZeTdzZ09hOVpBY2NBM3RQSTE4ClhiNG83L3J3VmhnaVc1YjFUeE1o
+            cEtrNHphKzFEZ0xid3ByTE5JRnBFYlUKLS0tIHJrcnZyWURGc3ZHTFp2UnZnZEcx
+            T01uK2RJRXBiTFR6THdxemY1NWgyQ1UKiBObyru4zPougBuviCV6njVpEqUzPT+2
+            iGgdCKaC9aYyYbDWKfTArleHap72WskN6To9MXP0NffmFcMlN4YJ/w==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1pr6q5m56rdjsuthlylncsddyqk335fuq5vx850rg6zth5hs7xv0qexkkym
+    lastmodified: "2026-07-11T00:08:02Z"
+    mac: ENC[AES256_GCM,data:YR0PaSuEMpTa3JkEz1a7A5GAIoWhoZjsqUsHsCWjmi+hOwoe32mrrlkoZJCwbMNdY6fzEpHdY+zvHHzdeWIWfr5rkDgBYnnD42RsG2x8ePnWAjZHKVEgr4r8JrMcofeFn88IOUnIHqXOKnAUhIqP4fvnh3GrPJhJUBSDun5pof8=,iv:6xHzyJyBXS6jL3CeiTLhBgXgbJ+BeAem1hAi5NS2h9k=,tag:4udLVwcnggfUtGFY1+JQ5Q==,type:str]
+    unencrypted_suffix: _unencrypted
+    version: 3.13.1

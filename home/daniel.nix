@@ -15,6 +15,7 @@
     ./programs/ghostty
     ./programs/quickshell
     ./programs/steam
+    ./sops
     inputs.sops-nix.homeManagerModules.sops
   ];
   home.packages = with pkgs; [
