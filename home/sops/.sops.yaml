@@ -1,0 +1,7 @@
+keys: 
+  - &daniel age1pr6q5m56rdjsuthlylncsddyqk335fuq5vx850rg6zth5hs7xv0qexkkym
+creation_rules: 
+  - path_regex: .(yaml|json|env|ini)$
+    key_groups:
+      - age: 
+        - *daniel
