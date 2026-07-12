@@ -68,7 +68,7 @@
             NODE_PATH="~/.npm/bin";
             QMLLS_BUILD_DIRS = "${pkgs.quickshell}/bin";
             CARGO_HOME="/home/daniel/.cargo";
-            PATH="$PATH:/home/daniel/.cargo/bin/";
+            PATH="$PATH:/home/daniel/.cargo/bin";
         };
     };
 }
