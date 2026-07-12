@@ -67,7 +67,8 @@
         sessionVariables = {
             NODE_PATH="~/.npm/bin";
             QMLLS_BUILD_DIRS = "${pkgs.quickshell}/bin";
-            PATH="$PATH:~/.cargo/bin/";
+            CARGO_HOME="/home/daniel/.cargo";
+            PATH="$PATH:/home/daniel/.cargo/bin/";
         };
     };
 }
