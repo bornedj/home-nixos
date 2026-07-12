@@ -95,6 +95,7 @@
     "nvidia-kernel-modules"
     "cider-2"
     "widevine-cdm"
+    "copilot.vim"
   ];
 
   # List packages installed in system profile. To search, run:
