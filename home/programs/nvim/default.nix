@@ -123,6 +123,11 @@ in
                 plugin = which-key-nvim;
                 config = builtins.readFile ./plugins/which-key.lua;
             }
+            {
+                type = "lua";
+                plugin = copilot-vim;
+                config = builtins.readFile ./plugins/copilot.lua;
+            }
         ];
     };
 }
