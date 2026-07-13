@@ -370,3 +370,134 @@ most) build them. Use this to pick a project by the skill you want to practise.
 - Present utilities: `hyprpaper`, `grim`, `matugen`. Rust toolchain present via `rustup`;
   no cargo `devShell` or Rust packaging in the flake yet (addressed by the foundational
   step).
+
+---
+---
+
+# Addendum (2026-07-13): Reorienting toward a systems-engineering career
+
+Everything above is preserved as the original desktop-environment plan. This addendum
+records a follow-up conversation that reassessed that plan against a clearer goal:
+**Daniel leans toward systems engineering over embedded engineering**, and wants the
+project portfolio to point at that career path. The desktop material is kept because it
+remains the best "fluency and motivation" track; this section adds the "career-signal"
+track and re-weights the two.
+
+## Honest assessment of the original DE plan for a systems career
+
+The DE plan is an excellent way to rebuild Rust fluency and stay motivated (you use these
+tools daily, so you will actually finish them). Measured strictly against a
+**systems-engineering** hiring signal, however, it rates roughly a B+, not an A, because
+much of its surface is domain-specific to the Linux desktop.
+
+**What transfers strongly to systems roles (keep and emphasize):**
+
+- `tokio` async: tasks, channels (`broadcast`/`mpsc`/`watch`), `select!`.
+- IPC and wire-protocol design: sockets, framing, backpressure, versioning.
+- FFI / `-sys` crates.
+- The long-lived, robust, bounded-resource daemon discipline.
+- `serde`, error modelling, `tracing`.
+
+**What is desktop-specific and transfers weakly to mainstream systems hiring:**
+
+- Wayland protocol plumbing, `wlr-layer-shell`, `wl_shm` buffer management.
+- 2D rendering (`tiny-skia`/`femtovg`).
+- D-Bus servicing.
+- sysfs / hwmon / backlight -- this is the embedded side, which is the lower priority.
+
+Conclusion: the graphics-heavy tiers (`osd` rendering, wallpaper) and the D-Bus tiers do
+the least for a systems (non-embedded) career. The transferable core of the DE plan is the
+async / IPC / FFI / daemon spine, which `sysmond` already exercises.
+
+## Decision
+
+Focus areas chosen, in priority order: **networking / protocols, storage / databases, and
+distributed systems.** (Observability / eBPF was considered and set aside.) These three are
+not separate tracks -- they compose into a single canonical arc: **a distributed
+key-value store** (a "mini-TiKV"). Networking is the front end, storage is the single-node
+engine, distributed is the replication layer. It is built in stages, and each stage is a
+complete, standalone-credible project.
+
+## The systems arc (staged; each stage ships something complete)
+
+### Stage 0 -- Async / networking warmup
+
+- **Build:** work through Tokio's official **`mini-redis`** tutorial.
+- **Why:** the canonical async + sockets + framing primer, and the on-ramp to Stage 1. The
+  DE `sysmond` daemon exercises the same muscles (socket server, `broadcast`, framing), so
+  the two reinforce each other. This is where the actual "shake the rust off" happens.
+- **Effort:** S.
+
+### Stage 1 -- Networking / protocols
+
+- **Build:** a real wire protocol from raw sockets. Recommended: **RESP (the Redis
+  protocol)** server, because it becomes the front end of the Stage 2 storage engine (no
+  wasted work). Alternatives for variety: a DNS server or an HTTP/1.1 server.
+- **Skills honed:** protocol parsing and framing, pipelining, connection lifecycle,
+  backpressure, graceful shutdown, `tokio` networking.
+- **References:** **Codecrafters** has guided Rust tracks for Redis, DNS, HTTP, and SQLite
+  if a scaffold is wanted.
+- **Effort:** M.
+
+### Stage 2 -- Storage / databases
+
+Build a single-node storage engine behind the Stage 1 front end, in two steps:
+
+- **Step A -- log-structured / Bitcask-style KV:** append-only log + in-memory hash index
+  + compaction. PingCAP's **Talent Plan** course "Practical Networked Applications in
+  Rust" builds exactly this and also covers the networking layer, overlapping Stage 1.
+- **Step B -- LSM-tree:** graduate to a log-structured merge tree. **`skyzh/mini-lsm`**
+  ("Build a mini LSM storage engine in Rust") is an excellent guided tutorial.
+- **Skills honed:** write-ahead log, memtables, SSTables, compaction, crash recovery,
+  on-disk formats, bloom filters, `mmap`, durability and `fsync` semantics.
+- **Effort:** M-L.
+
+### Stage 3 -- Distributed systems (capstone; only if energy holds)
+
+- **Build:** add **Raft**-based replication to make the KV store multi-node.
+- **Paths:** PingCAP Talent Plan's "Distributed Systems in Rust" labs; the **MIT 6.5840**
+  labs implemented in Rust; or building against / contributing to TiKV's **`raft-rs`**.
+- **Skills honed:** leader election, log replication, snapshots, linearizability,
+  membership changes, partition handling.
+- **Effort:** L (the largest by far).
+
+**End state:** RESP front end + LSM engine + Raft = a coherent distributed database, built
+incrementally, that can be stopped at any stage with something real.
+
+## Scope guidance (important)
+
+Do **not** front-load Raft. Stages 0-2 (warmup -> protocol server -> single-node storage
+engine) hold most of the durable learning and already make a strong portfolio. Reach
+Stage 3 only after storage feels comfortable. Understanding storage and networking cold
+matters more than shipping a from-scratch Raft.
+
+## How the two tracks now relate
+
+- **Desktop track = fluency and motivation spine.** Keep `sysmond` (its async / socket /
+  IPC code is a direct warmup for Stage 1) and keep it minimal. Do `osd` only if one
+  graphics/protocol experience is wanted for breadth. **Drop the wallpaper tier.** Treat
+  `notifd` / `clipd` / `launcherd` as optional "nicer desktop" side quests, not career
+  work.
+- **Systems arc = the career signal.** This is where the deliberate hours go.
+
+## OSS contribution targets for the systems track
+
+Real systems-Rust codebases where small PRs signal "works in real systems code":
+
+- Networking: `tokio`, `hyper`, `tonic`.
+- Storage: `sled`, `redb`, `datafusion`.
+- Distributed: `raft-rs`, `tikv`.
+
+## Reference reading
+
+- Martin Kleppmann, *Designing Data-Intensive Applications* -- the map of the whole
+  territory.
+- Alex Petrov, *Database Internals* -- storage and replication mechanics.
+
+## Revised focus order
+
+1. Stage 0 warmup (`mini-redis`) in parallel with DE `sysmond` (shared skills).
+2. Stage 1 RESP server.
+3. Stage 2 storage engine (Bitcask-style, then LSM).
+4. Stage 3 Raft / distributed KV, only if appetite remains.
+5. Desktop components beyond `sysmond` remain optional, motivation-driven side quests.
