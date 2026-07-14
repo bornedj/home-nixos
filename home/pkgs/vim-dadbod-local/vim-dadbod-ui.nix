@@ -8,7 +8,7 @@ pkgs.vimUtils.buildVimPlugin {
         owner = "bornedj";
         repo = "vim-dadbod-ui";
         rev = "fix/oracle-table-name-truncation-237";
-        hash = "sha256-BLlmegQmBDY42vefhwR6xNpf1Ot0yaQ2ulwsu4UlE1Q=";
+        hash = "sha256-C3eR5PfOd/RRlQVEUcPpd/XyelPP6jPrbtGhcIzN0lU=";
     };
 }
 
