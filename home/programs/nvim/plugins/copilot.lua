@@ -1,5 +1,5 @@
-vim.keymap.set('n', "<leader>cpe", vim.cmd { cmd = "Copilot", args = {"enable"} })
-vim.keymap.set('n', "<leader>cpd", vim.cmd { cmd = "Copilot", args = {"enable"} })
+-- need to figure out why the Command shows as unknown 
+-- vim.keymap.set('n', "<leader>cp", vim.cmd.Copilot { args = {"copilot_enabled!"} })
 vim.keymap.set('i', '<C-y>', 'copilot#Accept("")', {
   expr = true,
   replace_keycodes = false
