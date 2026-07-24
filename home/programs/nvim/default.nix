@@ -41,6 +41,7 @@ in
             pyright
             nixd
             kdePackages.qtdeclarative #qmlls
+            haskell-language-server
         ];
 
         plugins = with pkgs.vimPlugins; [

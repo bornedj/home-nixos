@@ -116,6 +116,12 @@ vim.lsp.config('qmlls', {
 })
 vim.lsp.enable('qmlls')
 
+vim.lsp.config('hls', {
+    filetypes = { 'haskell', 'lhaskell', 'cabal' },
+})
+
+vim.lsp.enable('hls')
+
 -- completion setup
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
