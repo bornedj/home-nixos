@@ -61,6 +61,12 @@
             extract_secret() {
                 sops decrypt /home/nixos/dotfiles/home/secrets/home.yaml | yq $1 | tr -d '"' | clip.exe
             }
+
+            nsi() {
+                pkg=$(nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --scheme history | awk '{print $2}')
+                nix shell nixpkgs#"$pkg"
+            }
+
             eval "$(zoxide init zsh)"
         '';
 
