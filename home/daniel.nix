@@ -28,6 +28,10 @@
     ripgrep
     zoxide
 
+    # haskell
+    cabal-install
+    ghc
+
     # cli utils
     fzf
     curl
