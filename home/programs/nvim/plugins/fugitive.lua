@@ -30,5 +30,9 @@ autocmd("BufWinEnter", {
     vim.keymap.set("n", "<leader>t", ":Git push -u origin ", opts);
 
     vim.keymap.set("n", "<leader>fap", ":Git fetch -a --prune --tags -f", opts);
+
+    -- override checkout commands with switch
+    vim.keymap.set("n", "co<Space>", ":Git switch ",opts)
+    vim.keymap.set("n", "coc", ":Git switch -c ",opts)
   end,
 })
