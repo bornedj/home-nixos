@@ -72,7 +72,7 @@ hl.workspace_rule({ workspace = "10", monitor = vars.sceptre_output })
 hl.window_rule({match = {class = vars.browser}, workspace = vars.workspace.browser, monitor = vars.benq_output})
 hl.window_rule({match = {class = "com.mitchellh.ghostty"}, workspace = vars.workspace.terminal, monitor = vars.sceptre_output})
 hl.window_rule({match = {class = vars.steam}, workspace = vars.workspace.steam .. " silent", monitor = vars.sceptre_output})
-hl.window_rule({match = {class = "Cider"}, workspace = vars.workspace.music .. " silent", monitor = vars.sceptre_output})
+hl.window_rule({match = {class = "cider"}, workspace = vars.workspace.music .. " silent", monitor = vars.sceptre_output})
 hl.window_rule({match = {class = vars.discord}, workspace = vars.workspace.discord .. " silent", monitor = vars.benq_output})
 hl.window_rule({
     match = {class = "cs2"},
