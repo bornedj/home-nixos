@@ -34,7 +34,7 @@
             update = "cd ~/dotfiles && nixos-rebuild switch --flake .#daniel --sudo";
 
             delete_node_modules="cd ~/github && find -maxdepth 2 -type d | rg node_modules | xargs rm -rf";
-            delete_old_nix_generations="sudo nix-env --delete-generations -p /nix/var/nix/profiles/system 1w";
+            delete_old_nix_generations="sudo nix-env --delete-generations -p /nix/var/nix/profiles/system 5d";
 
             # open a nix shell with zsh
             nix-shell = "nix-shell --command $SHELL";
