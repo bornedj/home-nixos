@@ -27,6 +27,7 @@
     # rust cli
     ripgrep
     zoxide
+    fd
 
     # haskell
     cabal-install
