@@ -28,6 +28,7 @@
     ripgrep
     zoxide
     fd
+    yazi
 
     # haskell
     cabal-install
