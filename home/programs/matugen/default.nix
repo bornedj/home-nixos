@@ -13,26 +13,26 @@
         templates = {
             ghostty = {
                 input_path = ./templates/musashi;
-                output_path = "~/.config/ghostty/themes/musashi";
+                output_path = ["~/.config/ghostty/themes/musashi"];
                 post_hook = "pkill -SIGUSR2 ghostty";
             };
             nvim = {
                 input_path = ./templates/nvim-colors.lua;
-                output_path = "~/.config/matugen.lua";
+                output_path = ["~/.config/matugen.lua"];
                 post_hook = "pkill -SIGUSR1 nvim";
             };
             tmux = {
                 input_path = ./templates/tmux-colors.conf;
-                output_path = "~/.config/tmux-colors.conf";
+                output_path = ["~/.config/tmux-colors.conf"];
                 post_hook = "tmux source ~/.config/tmux/tmux-colors.conf";
             };
             quickshell = {
                 input_path = ./templates/quickshell.json;
-                output_path = "~/.config/quickshell.json";
+                output_path = ["~/.config/quickshell.json"];
             };
             hyprland = {
                 input_path = ./templates/hyprland.lua;
-                output_path = "~/.config/hyprland.lua";
+                output_path = ["~/.config/hyprland.lua"];
             };
         };
     };
