@@ -43,6 +43,8 @@
 
             ns = "nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --scheme history";
             source-color="matugen image ~/Pictures/wallpapers/vagabond-water.jpg --source-color-index 1 --show-colors";
+
+            find="fd";
         };
 
         profileExtra = ''
