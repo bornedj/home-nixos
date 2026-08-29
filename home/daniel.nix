@@ -33,6 +33,7 @@
     # haskell
     cabal-install
     ghc
+    haskellPackages.hoogle
 
     # cli utils
     fzf
