@@ -16,8 +16,10 @@ Scope {
             required property var modelData
             screen: modelData
 
+            property HyprlandMonitor monitor: Hyprland.monitorFor(modelData)
+
             // hide bar when something is fullscreened
-            visible: !Hyprland.focusedWorkspace?.hasFullscreen
+            visible: !monitor?.activeWorkspace?.hasFullscreen
 
             anchors {
                 top: true
