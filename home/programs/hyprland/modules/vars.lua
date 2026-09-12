@@ -9,7 +9,7 @@ module.discord = "discord"
 module.steam = "steam"
 
 -- monitors
-module.sceptre_output = "DP-6"
+module.sceptre_output = "DP-4"
 module.benq_output = "DP-5"
 
 -- workspace names
