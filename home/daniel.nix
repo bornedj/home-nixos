@@ -34,6 +34,7 @@
     cabal-install
     ghc
     haskellPackages.hoogle
+    ghcid
 
     # cli utils
     fzf
