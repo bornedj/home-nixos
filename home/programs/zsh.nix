@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 {
+    home.packages = [ pkgs.wl-clipboard ];
+
     programs.zsh = {
         enable = true;
         defaultKeymap = "vicmd";
@@ -14,8 +16,8 @@
         shellAliases = {
             c = "clear";
             cd = "z";
-            cliphis = "history | fzf | cut -d ' ' -f 2- | clip.exe";
-            p = "xclip -o";
+            cliphis = "history | fzf | cut -d ' ' -f 2- | wl-copy";
+            p = "wl-paste";
 
             # alias to count all open inotify watchers
             watchercount = "lsof | rg inotify | wc -l";
@@ -31,12 +33,12 @@
             # --sudo used as ssh keys are configured for the user.
             # Using sudo to run as the root meant losing the keys which access
             # the private repo where the certs are hosted
-            update = "cd ~/github_repos/home-nixos && nixos-rebuild switch --flake .#daniel --sudo";
-            switch = "nixos-rebuild switch --flake .#daniel --sudo";
+            update = "nixos-rebuild switch --flake ~/github_repos/home-nixos#daniel --sudo";
+            switch = "nixos-rebuild switch --flake ~/github_repos/home-nixos#daniel --sudo";
 
             latest_tag = "git tag --sort=creatordate | tail -n 1";
 
-            delete_node_modules="cd ~/github_repos && fd -d 2 -t d | rg node_modules | xargs rm -rf";
+            delete_node_modules="fd -I -d 2 -t d '^node_modules$' ~/github_repos -X rm -rf";
             delete_old_nix_generations="sudo nix-env --delete-generations -p /nix/var/nix/profiles/system 5d";
 
             # open a nix shell with zsh
@@ -69,11 +71,11 @@
 
         initContent = ''
             extract_secret() {
-                sops decrypt /home/daniel/github_repos/home-nixos/home/sops/home.yaml | yq $1 | tr -d '"' | clip.exe
+                sops decrypt "$HOME/github_repos/home-nixos/home/sops/home.yaml" | yq -r "$1" | wl-copy
             }
 
             nix-show-drv() {
-                nix derivation show "$1" | jq '.[].[].structuredAttrs | {url, rev}'
+                nix derivation show "$1" | jq '.derivations[].structuredAttrs | {url, rev}'
             }
 
             prefetch-specified-git() {
@@ -83,7 +85,7 @@
             # extracts url/rev from a drv and prefetches it in one call
             prefetch-drv() {
                 local url rev
-                read -r url rev <<< "$(nix derivation show "$1" | jq -r '.[].[].structuredAttrs | "\(.url) \(.rev)"')"
+                read -r url rev <<< "$(nix derivation show "$1" | jq -r '.derivations[].structuredAttrs | "\(.url) \(.rev)"')"
                 prefetch-specified-git "$url" "$rev"
             }
 
@@ -93,6 +95,7 @@
             }
 
             eval "$(zoxide init zsh)"
+            (( $+commands[treehouse] )) && eval "$(treehouse completion zsh)"
         '';
 
         sessionVariables = {

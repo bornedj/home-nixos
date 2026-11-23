@@ -14,9 +14,6 @@
       pull = {
         rebase = true;
       };
-      merge = {
-        rebase = true;
-      };
       push = {
         autoSetupRemote = "true";
       };
