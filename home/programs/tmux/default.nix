@@ -1,24 +1,10 @@
-{ pkgs, ... }: 
+{ lib, pkgs, ... }:
 
 {
-    programs.tmux = {
-        enable = true;
-        escapeTime = 300;
-        prefix = "C-a";
-        keyMode = "vi";
-        mouse = true;
-        clock24 = true;
-        shell = "/etc/profiles/per-user/daniel/bin/zsh";
-
-        plugins = with pkgs.tmuxPlugins; [
-            vim-tmux-navigator
-            resurrect
-            continuum
-            dotbar
-        ];
-
-        extraConfig = ''
-            ${builtins.readFile ./tmux.conf}
-        '';
-    };
+  programs.tmux.extraConfig = lib.mkOrder 1000 ''
+    source-file ~/.config/tmux/tmux-colors.conf
+    # dotbar reads the @tmux-dotbar-* options the colour file sets, so it has to
+    # run after it.
+    run-shell ${pkgs.tmuxPlugins.dotbar.rtp}
+  '';
 }

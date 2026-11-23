@@ -42,6 +42,7 @@
     agentConfig.enable = true;
     scripts.enable = true;
     tmux = {
+      enable = true;
       sessions = [
         {
           name = "configs";
