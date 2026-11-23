@@ -61,7 +61,7 @@
 
         initContent = ''
             extract_secret() {
-                sops decrypt /home/nixos/dotfiles/home/secrets/home.yaml | yq $1 | tr -d '"' | clip.exe
+                sops decrypt ~/dotfiles/home/sops/home.yaml | yq $1 | tr -d '"' | clip.exe
             }
 
             nsi() {
