@@ -8,6 +8,7 @@
 
   imports = [ 
     ./programs/zsh.nix
+    ./programs/git
     ./programs/nvim
     ./programs/tmux
     ./programs/hyprland
@@ -57,29 +58,6 @@
     cider-2
     grim
   ];
-
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = "Daniel Borne";
-        email = "borne.danielj@gmail.com";
-      };
-      core = {
-        symlinks = false;
-      };
-      pull = {
-        rebase = true;
-      };
-      push = {
-        autoSetupRemote = "true";
-      };
-      init.defaultBranch = "main";
-    };
-    ignores = [
-        "shell.nix"
-    ];
-  };
 
   programs.discord = {
       enable = true;
