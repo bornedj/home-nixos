@@ -1,4 +1,10 @@
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  self,
+  config,
+  ...
+}:
 
 {
   home.username = "daniel";
@@ -6,7 +12,8 @@
   programs.home-manager.enable = true;
   home.stateVersion = "25.11";
 
-  imports = [ 
+  imports = [
+    self.homeModules.default
     ./programs/zsh.nix
     ./programs/nvim
     ./programs/tmux
@@ -18,6 +25,15 @@
     ./sops
     inputs.sops-nix.homeManagerModules.sops
   ];
+
+  bornedj = {
+    flake = {
+      dir = "${config.home.homeDirectory}/dotfiles";
+      host = "daniel";
+    };
+    workspace.reposDir = "${config.home.homeDirectory}/github";
+  };
+
   home.packages = with pkgs; [
     # languages
     rustup
@@ -49,7 +65,7 @@
 
     # secrets
     sops
-    
+
     # music
     cider-2
     grim
@@ -74,12 +90,12 @@
       init.defaultBranch = "main";
     };
     ignores = [
-        "shell.nix"
+      "shell.nix"
     ];
   };
 
   programs.discord = {
-      enable = true;
+    enable = true;
   };
 
   programs.nix-search-tv.enable = true;
@@ -96,15 +112,15 @@
   # file used for dynamic store path import of lua snippets
   home.file.".config/nvim/lua/hypr.lua" = {
     text = ''
-    return {
-        stubs = "${pkgs.hyprland}/share/hypr/stubs"
-    }
+      return {
+          stubs = "${pkgs.hyprland}/share/hypr/stubs"
+      }
     '';
   };
 
   home.file.".config/nvim/lua/qmlls_path.lua".text = ''
-  return {
-        stubs = "${pkgs.kdePackages.qtdeclarative}"
-  }
+    return {
+          stubs = "${pkgs.kdePackages.qtdeclarative}"
+    }
   '';
 }
