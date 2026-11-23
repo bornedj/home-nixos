@@ -1,17 +1,18 @@
 { ... }:
 
 {
+  # Generated through home-manager rather than linked as a plain file so the
+  # systemd session hooks are prepended; without them hyprland-session.target
+  # never starts and services.hyprpaper never runs.
   wayland.windowManager.hyprland = {
       enable = true;
       systemd.enable = true;
+      configType = "lua";
+      extraConfig = builtins.readFile ./hyprland.lua;
   };
 
   services.hyprpaper.enable = true;
 
-  home.file.".config/hypr/hyprland.lua" = {
-      source = ./hyprland.lua;
-      force = true;
-  };
   home.file.".config/hypr/modules" = {
       source = ./modules;
       recursive = true;
