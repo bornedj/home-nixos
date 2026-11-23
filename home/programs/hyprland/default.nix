@@ -4,6 +4,10 @@
   wayland.windowManager.hyprland = {
       enable = true;
       systemd.enable = true;
+      # home-manager switched the default to "lua" and warns while
+      # stateVersion is below 26.05. The lua config here is written by
+      # home.file below, so the generated file stays hyprland.conf.
+      configType = "hyprlang";
   };
 
   services.hyprpaper.enable = true;
