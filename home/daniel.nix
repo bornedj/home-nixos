@@ -62,6 +62,12 @@
       ];
       sessionizerRoots = [ config.bornedj.workspace.reposDir ];
     };
+    nvim = {
+      enable = true;
+      copilot.enable = true;
+      qml.enable = true;
+      luaLibraries = [ "${pkgs.hyprland}/share/hypr/stubs" ];
+    };
   };
 
   programs.git.settings.user.email = "borne.danielj@gmail.com";
@@ -78,18 +84,4 @@
     enable = true;
   };
 
-  # file used for dynamic store path import of lua snippets
-  home.file.".config/nvim/lua/hypr.lua" = {
-    text = ''
-      return {
-          stubs = "${pkgs.hyprland}/share/hypr/stubs"
-      }
-    '';
-  };
-
-  home.file.".config/nvim/lua/qmlls_path.lua".text = ''
-    return {
-          stubs = "${pkgs.kdePackages.qtdeclarative}"
-    }
-  '';
 }
