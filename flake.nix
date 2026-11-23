@@ -23,6 +23,10 @@
         url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
         inputs.nixpkgs.follows = "nixpkgs";
     };
+    treehouse = {
+      url = "github:kunchenguid/treehouse";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
