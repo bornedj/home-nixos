@@ -97,6 +97,7 @@
     "cider-2"
     "widevine-cdm"
     "copilot.vim"
+    "claude-code"
   ];
 
   # List packages installed in system profile. To search, run:

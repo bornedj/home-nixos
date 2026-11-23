@@ -49,6 +49,9 @@
 
     # secrets
     sops
+
+    # agents
+    claude-code
     
     # music
     cider-2
@@ -84,14 +87,10 @@
 
   programs.nix-search-tv.enable = true;
 
-  # dotfiles
-  home.file.".local/bin/tmux-sessionizer.sh" = {
-    source = ./.local/bin/tmux-sessionizer.sh;
+  home.file.".local/bin" = {
+    source = ./.local/bin;
     executable = true;
-  };
-  home.file.".local/bin/tmux-session-init.sh" = {
-    source = ./.local/bin/tmux-session-init.sh;
-    executable = true;
+    recursive = true;
   };
   # file used for dynamic store path import of lua snippets
   home.file.".config/nvim/lua/hypr.lua" = {
