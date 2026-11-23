@@ -40,6 +40,27 @@
       secretsFile = "${config.bornedj.flake.dir}/home/sops/home.yaml";
     };
     agentConfig.enable = true;
+    scripts.enable = true;
+    tmux = {
+      sessions = [
+        {
+          name = "configs";
+          dir = config.bornedj.flake.dir;
+          key = "u";
+        }
+        {
+          name = "github_repos";
+          dir = config.bornedj.workspace.reposDir;
+          key = "g";
+        }
+        {
+          name = "obsidian";
+          dir = "${config.home.homeDirectory}/obsidian";
+          key = "o";
+        }
+      ];
+      sessionizerRoots = [ config.bornedj.workspace.reposDir ];
+    };
   };
 
   programs.git.settings.user.email = "borne.danielj@gmail.com";
@@ -56,15 +77,6 @@
     enable = true;
   };
 
-  # dotfiles
-  home.file.".local/bin/tmux-sessionizer.sh" = {
-    source = ./.local/bin/tmux-sessionizer.sh;
-    executable = true;
-  };
-  home.file.".local/bin/tmux-session-init.sh" = {
-    source = ./.local/bin/tmux-session-init.sh;
-    executable = true;
-  };
   # file used for dynamic store path import of lua snippets
   home.file.".config/nvim/lua/hypr.lua" = {
     text = ''
