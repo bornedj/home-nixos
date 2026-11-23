@@ -1,13 +1,12 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   programs.neovim = {
-    # generating the colors file with matugen
-    initLua = ''
-      require("matugen")
-      ${builtins.readFile ./plugins/colorscheme.lua}
-    '';
-
     plugins = [ pkgs.vimPlugins.base16-nvim ];
+
+    # Runs from init.lua, before any plugin/ file: a colorscheme clears every
+    # highlight group, so plugins that define groups during their own setup
+    # (obsidian does) have to run after it.
+    initLua = lib.mkOrder 400 (builtins.readFile ./colors.lua);
   };
 }
