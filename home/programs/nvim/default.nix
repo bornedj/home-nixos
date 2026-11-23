@@ -7,8 +7,16 @@ in
     home.packages = with pkgs; [
         gcc
         clang-tools
-        tree-sitter # cli
     ];
+    # store paths for lua, same approach as hypr.lua and qmlls_path.lua
+    home.file.".config/nvim/lua/java_paths.lua".text = ''
+        return {
+            jdtls = "${pkgs.jdt-language-server}/bin/jdtls",
+            lombok_jar = "${pkgs.lombok}/share/java/lombok.jar",
+            debug_plugin_glob = "${pkgs.vscode-extensions.vscjava.vscode-java-debug}/share/vscode/extensions/vscjava.vscode-java-debug/server/com.microsoft.java.debug.plugin-*.jar",
+        }
+    '';
+
     # home nvim configuration
     programs.neovim = {
         enable = true;
@@ -42,6 +50,8 @@ in
             nixd
             kdePackages.qtdeclarative #qmlls
             haskell-language-server
+            jdt-language-server
+            tree-sitter # cli
         ];
 
         plugins = with pkgs.vimPlugins; [
