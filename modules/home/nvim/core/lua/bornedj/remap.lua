@@ -1,4 +1,3 @@
-vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("i", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("v", "<leader>pv", vim.cmd.Ex)
@@ -44,39 +43,6 @@ vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
 
--- command to open a file with explorer.exe so I can open files with their native
--- windows default program. I.E. open html files in windows chrome
-vim.keymap.set("n", "<leader>fp", function()
-    local startingDir = vim.fn.getcwd()
-    local explorer = string.format("silent !explorer.exe %s", vim.fn.expand('%:t'))
-    vim.cmd("cd %:h")
-    vim.cmd(explorer)
-    vim.cmd(string.format("cd %s", startingDir))
-end)
-
--- command to open a file explorer in the location of the current buffer
-vim.keymap.set("n", "<leader>fe", function()
-    local startingDir = vim.fn.getcwd()
-    vim.cmd("cd %:h")
-    vim.cmd("silent !explorer.exe .")
-    vim.cmd(string.format("cd %s", startingDir))
-end)
-
--- open windows git bash and cd into the dir of the current buffer
-vim.keymap.set("n", "<leader>gb", function()
-    vim.cmd(string.format("silent !/mnt/c/Program\\ Files/Git/git-bash.exe --cd=%s", vim.fn.getcwd()))
-end)
-
-
--- another wsl specific bind, used to remove ^M from files 
--- that have had windows carriages added to files
-vim.keymap.set("n", "<leader>ux", function()
-    vim.cmd("update")
-    vim.cmd("e ++ff=dos")
-    vim.cmd("setlocal ff=unix")
-    vim.cmd("w")
-end)
-
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
@@ -108,7 +74,7 @@ vim.keymap.set("n", "<leader>gl", function()
     -- drops the prepended git@ and appended .git and line break
     local origin = string.sub(vim.fn.system("git remote get-url origin"), 5, -6)
     local base_path = string.gsub(origin, ":", "/", 1)
-    local branch = string.gsub(vim.fn.system("git branch --show-current"), "\n", "", 1)
+    local branch = string.gsub(vim.fn.system("git symbolic-ref --short -q HEAD || git describe --tags --exact-match 2>/dev/null || git rev-parse --short HEAD"), "\n", "", 1)
     local formatted_url = string.format("https://%s/-/blob/%s/%s#L%s", base_path, branch, filename, line_number)
     vim.fn.setreg("+", formatted_url)
     print(formatted_url)
@@ -120,7 +86,7 @@ vim.keymap.set('n', "<leader>gfl", function()
     -- drops the prepended git@ and appended .git and line break
     local origin = string.sub(vim.fn.system("git remote get-url origin"), 5, -6)
     local base_path = string.gsub(origin, ":", "/", 1)
-    local branch = string.gsub(vim.fn.system("git branch --show-current"), "\n", "", 1)
+    local branch = string.gsub(vim.fn.system("git symbolic-ref --short -q HEAD || git describe --tags --exact-match 2>/dev/null || git rev-parse --short HEAD"), "\n", "", 1)
     local formatted_url = string.format("https://%s/-/blob/%s/%s", base_path, branch, filename)
     vim.fn.setreg("+", formatted_url)
     print(formatted_url)

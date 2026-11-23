@@ -69,8 +69,14 @@
       # `nix flake check` even when no host enables that feature.
       checks.${system}.homeModules =
         let
+          # copilot.vim is unfree and the host config allows it, so the
+          # evaluation has to as well.
+          checkPkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfreePredicate = pkg: lib.getName pkg == "copilot.vim";
+          };
           evaluated = home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
+            pkgs = checkPkgs;
             modules = [
               self.homeModules.default
               {
@@ -91,7 +97,14 @@
                   tmux.enable = true;
                   scripts.enable = true;
                   agentConfig.enable = true;
-                  nvim.enable = true;
+                  nvim = {
+                    enable = true;
+                    copilot.enable = true;
+                    java.enable = true;
+                    qml.enable = true;
+                    wsl.enable = true;
+                    luaLibraries = [ "/home/check/stubs" ];
+                  };
                 };
               }
             ];
