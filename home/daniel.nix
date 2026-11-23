@@ -16,6 +16,7 @@
     ./programs/ghostty
     ./programs/quickshell
     ./programs/steam
+    ./agent-config
     ./sops
     inputs.sops-nix.homeManagerModules.sops
   ];
@@ -36,6 +37,9 @@
     ghc
     haskellPackages.hoogle
     ghcid
+
+    # agent worktree manager
+    inputs.treehouse.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # cli utils
     fzf
