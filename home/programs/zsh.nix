@@ -34,7 +34,7 @@
             # Using sudo to run as the root meant losing the keys which access
             # the private repo where the certs are hosted
             update = "nixos-rebuild switch --flake ~/github_repos/home-nixos#daniel --sudo";
-            switch = "nixos-rebuild switch --flake ~/github_repos/home-nixos#daniel --sudo";
+            switch = "nixos-rebuild switch --flake .#daniel --sudo";
 
             latest_tag = "git tag --sort=creatordate | tail -n 1";
 
