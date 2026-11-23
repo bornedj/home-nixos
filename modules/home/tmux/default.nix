@@ -116,5 +116,47 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable { };
+  config = lib.mkIf cfg.enable {
+    programs.tmux = {
+      enable = true;
+      prefix = "C-a";
+      keyMode = "vi";
+      mouse = true;
+      clock24 = true;
+      escapeTime = 10;
+      shell = "${config.home.profileDirectory}/bin/zsh";
+
+      # continuum is not a plugin here: it has to load last, see below.
+      plugins = with pkgs.tmuxPlugins; [
+        vim-tmux-navigator
+        resurrect
+      ];
+
+      # Home-manager emits the plugins first. Order 1000 is left to the host
+      # theme, so the order is: plugins, shared conf, theme, claude status,
+      # continuum.
+      extraConfig = lib.mkMerge [
+        (lib.mkOrder 900 ''
+          ${builtins.readFile ./tmux.conf}
+          # tmux sessionizer opens new session via fzf select
+          bind-key -r f run-shell "tmux neww ${sessionizer}/bin/tmux-sessionizer.sh"
+
+          # frequent sessions
+          ${sessionBinds}
+        '')
+        (lib.mkIf cfg.claudeStatus.enable (
+          lib.mkOrder 1900 ''
+            run-shell ${claudeInject}/bin/tmux-claude-inject.sh
+          ''
+        ))
+        # continuum autosaves by prepending a #(continuum_save.sh) call to
+        # status-right, so it has to load after anything that sets
+        # status-right. As a regular plugin it loaded first and its hook got
+        # clobbered.
+        (lib.mkOrder 2000 ''
+          run-shell ${pkgs.tmuxPlugins.continuum.rtp}
+        '')
+      ];
+    };
+  };
 }
