@@ -34,6 +34,11 @@
     workspace.reposDir = "${config.home.homeDirectory}/github";
     git.enable = true;
     cli.enable = true;
+    zsh = {
+      enable = true;
+      generationRetention = "5d";
+      secretsFile = "${config.bornedj.flake.dir}/home/sops/home.yaml";
+    };
   };
 
   programs.git.settings.user.email = "borne.danielj@gmail.com";
