@@ -33,41 +33,13 @@
     };
     workspace.reposDir = "${config.home.homeDirectory}/github";
     git.enable = true;
+    cli.enable = true;
   };
 
   programs.git.settings.user.email = "borne.danielj@gmail.com";
 
   home.packages = with pkgs; [
-    # languages
-    rustup
-    lua
     nodejs_24
-
-    # rust cli
-    ripgrep
-    zoxide
-    fd
-    yazi
-
-    # haskell
-    cabal-install
-    ghc
-    haskellPackages.hoogle
-    ghcid
-
-    # cli utils
-    fzf
-    curl
-    age
-    jq
-    yq
-    tree
-
-    # postgres
-    postgresql_17
-
-    # secrets
-    sops
 
     # music
     cider-2
@@ -77,8 +49,6 @@
   programs.discord = {
     enable = true;
   };
-
-  programs.nix-search-tv.enable = true;
 
   # dotfiles
   home.file.".local/bin/tmux-sessionizer.sh" = {
