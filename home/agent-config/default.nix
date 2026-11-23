@@ -9,6 +9,29 @@ let
       source = ./skills + "/${name}";
     })
     (lib.filterAttrs (_: type: type == "directory") (builtins.readDir ./skills));
+
+  # Event name -> argument for claude-tmux-status.sh.
+  tmuxStatusEvents = {
+    SessionStart = "start";
+    UserPromptSubmit = "prompt";
+    PreToolUse = "tool";
+    Notification = "notify";
+    Stop = "stop";
+    SessionEnd = "end";
+  };
+
+  tmuxHooks = lib.mapAttrs
+    (event: arg: [
+      ({
+        hooks = [{
+          type = "command";
+          command = "$HOME/.local/bin/claude-tmux-status.sh ${arg}";
+        }];
+      } // lib.optionalAttrs (event == "PreToolUse") { matcher = "*"; })
+    ])
+    tmuxStatusEvents;
+
+  tmuxHooksFile = pkgs.writeText "claude-tmux-hooks.json" (builtins.toJSON tmuxHooks);
 in
 {
   # claude user configuration
@@ -20,35 +43,24 @@ in
     ".config/ORCHESTRATION.md".source = ./ORCHESTRATION.md;
   };
 
-  # Merges the Claude Code hooks below into ~/.claude/settings.json without
-  # touching the rest of the file (settings.json is otherwise self-managed
-  # by Claude Code, e.g. model/theme changes from within the app).
+  # Claude Code rewrites settings.json itself (model, theme, user hooks), so
+  # only the tmux status hook entries are merged in. Entries from an earlier
+  # run are dropped first, which keeps the merge idempotent and leaves every
+  # other key and hook alone. Failures only warn: a broken settings.json must
+  # not abort the whole home-manager activation.
   home.activation.claudeTmuxHooks = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    settings="$HOME/.claude/settings.json"
-    mkdir -p "$HOME/.claude"
-    [ -f "$settings" ] || echo '{}' > "$settings"
-    hooks='{
-        "SessionStart": [
-            { "hooks": [ { "type": "command", "command": "$HOME/.local/bin/claude-tmux-status.sh start" } ] }
-        ],
-        "UserPromptSubmit": [
-            { "hooks": [ { "type": "command", "command": "$HOME/.local/bin/claude-tmux-status.sh prompt" } ] }
-        ],
-        "PreToolUse": [
-            { "matcher": "*", "hooks": [ { "type": "command", "command": "$HOME/.local/bin/claude-tmux-status.sh tool" } ] }
-        ],
-        "Notification": [
-            { "hooks": [ { "type": "command", "command": "$HOME/.local/bin/claude-tmux-status.sh notify" } ] }
-        ],
-        "Stop": [
-            { "hooks": [ { "type": "command", "command": "$HOME/.local/bin/claude-tmux-status.sh stop" } ] }
-        ],
-        "SessionEnd": [
-            { "hooks": [ { "type": "command", "command": "$HOME/.local/bin/claude-tmux-status.sh end" } ] }
-        ]
-    }'
-    ${pkgs.jq}/bin/jq --argjson h "$hooks" '.hooks = $h' "$settings" > "$settings.tmp" \
-        && mv "$settings.tmp" "$settings"
-  '';
+    # Resolve symlinks so the write goes through to the real file.
+    settings="$(${pkgs.coreutils}/bin/readlink -f "$HOME/.claude/settings.json")"
+    mkdir -p "$(dirname "$settings")"
+    tmp="$(${pkgs.coreutils}/bin/mktemp "$settings.XXXXXX")"
 
+    if { if [ -s "$settings" ]; then cat "$settings"; else echo '{}'; fi; } \
+        | ${pkgs.jq}/bin/jq --slurpfile ours ${tmuxHooksFile} -f ${./merge-hooks.jq} > "$tmp"; then
+      [ ! -e "$settings" ] || ${pkgs.coreutils}/bin/chmod --reference="$settings" "$tmp"
+      mv "$tmp" "$settings"
+    else
+      rm -f "$tmp"
+      echo "claudeTmuxHooks: could not merge hooks into $settings, leaving it unchanged" >&2
+    fi
+  '';
 }
