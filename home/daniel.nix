@@ -32,7 +32,10 @@
       host = "daniel";
     };
     workspace.reposDir = "${config.home.homeDirectory}/github";
+    git.enable = true;
   };
+
+  programs.git.settings.user.email = "borne.danielj@gmail.com";
 
   home.packages = with pkgs; [
     # languages
@@ -70,29 +73,6 @@
     cider-2
     grim
   ];
-
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = "Daniel Borne";
-        email = "borne.danielj@gmail.com";
-      };
-      core = {
-        symlinks = false;
-      };
-      pull = {
-        rebase = true;
-      };
-      push = {
-        autoSetupRemote = "true";
-      };
-      init.defaultBranch = "main";
-    };
-    ignores = [
-      "shell.nix"
-    ];
-  };
 
   programs.discord = {
     enable = true;
