@@ -39,6 +39,7 @@
       generationRetention = "5d";
       secretsFile = "${config.bornedj.flake.dir}/home/sops/home.yaml";
     };
+    agentConfig.enable = true;
   };
 
   programs.git.settings.user.email = "borne.danielj@gmail.com";
