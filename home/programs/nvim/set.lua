@@ -18,6 +18,10 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
+-- style
+-- matugen's truecolor palette needs this
+vim.opt.termguicolors = true
+
 -- vim search
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
