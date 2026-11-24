@@ -185,23 +185,21 @@ Startup then runs in this order:
    runs. `require('base16-colorscheme')` and `require('onenord')` resolve
    at this point because Neovim's loader searches start packages before
    `packloadall`.
-2. **`plugin/` files** of every start package. Order across packages is
-   not something to rely on, so the core layer has exactly one such file,
-   `plugin/bornedj.lua`, which `require`s the `bornedj.*` modules in an
-   explicit list:
+2. **`plugin/` files** of every start package. The core layer has one
+   such file, `plugin/bornedj.lua`, which `require`s the `bornedj.*`
+   modules from a list:
 
    `remap, fugitive, telescope, harpoon, comment, treesitter, trouble,
    devicons, which-key, claude-code, undotree, obsidian, dadbod, lsp, cmp`
 
-   Two orderings in that list are deliberate. `remap` comes before
-   `harpoon` so harpoon's `<M-x>` (file 6) wins over remap's `<M-x>`
-   decrement, which is what happened before the refactor. `lsp` comes
-   before `cmp`: `lsp.lua` sets `vim.lsp.config('*', { capabilities =
-   cmp_nvim_lsp capabilities })` and calls `vim.lsp.enable { ... }` for the
-   core servers, so the capabilities are registered before any server
-   starts; `cmp.lua` then configures completion. Each `require` is wrapped
-   in `xpcall` with a traceback, so one failing module (obsidian without
-   its vault directories, say) is reported without stopping lsp and cmp.
+   The list order carries no meaning: no module depends on another having
+   run. `lsp.lua` sets the cmp capabilities and enables the servers in the
+   same file, and servers only start on `FileType`, after startup, so `lsp`
+   and `cmp` can come in either order. This is the classic `init.lua` full
+   of `require` lines, moved into a plugin file so it runs after
+   `init.lua`. Each `require` is wrapped in `xpcall` with a traceback, so
+   one failing module (obsidian without its vault directories, say) is
+   reported without stopping the rest.
 
    Optional layers also use `plugin/` files for things that must run at
    this stage: `bornedj-java.lua` adds the `LspAttach` autocmd that attaches
