@@ -167,10 +167,13 @@ in
       }
 
       (lib.mkIf cfg.copilot.enable {
-        programs.neovim.plugins = [
-          pkgs.vimPlugins.copilot-vim
-          (layerPlugin "copilot")
-        ];
+        programs.neovim = {
+          initLua = lib.mkOrder 350 (builtins.readFile ./copilot-globals.lua);
+          plugins = [
+            pkgs.vimPlugins.copilot-vim
+            (layerPlugin "copilot")
+          ];
+        };
       })
 
       (lib.mkIf cfg.java.enable {
