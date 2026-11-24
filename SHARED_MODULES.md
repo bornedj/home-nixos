@@ -3,8 +3,9 @@
 This flake is the single source of the home-manager config that two
 machines share: this one (`.#daniel`, Hyprland desktop) and a work WSL box
 whose private flake consumes it as a flake input. This document explains
-where shared code goes, how each flake sources it, why the setup is built
-this way, and how the Neovim layers load.
+where shared code goes, how each flake sources it, how the Nix module
+system composes the pieces, why the setup is built this way, and how the
+Neovim layers load.
 
 ## Where shared code lives
 
@@ -107,6 +108,169 @@ Day to day on the consumer: iterate against a local checkout with
 `nixos-rebuild build --flake .#nixos --override-input common path:<checkout>`,
 and after a change lands here run `nix flake update common` and switch.
 Drift can only show up as a stale `common` entry in that lock file.
+
+## How the module system ties it together
+
+### The layers, outside in
+
+1. **The flake** (`flake.nix`) declares inputs (nixpkgs, home-manager,
+   sops-nix, ...) and outputs. Two outputs matter here:
+   `nixosConfigurations.daniel`, the whole machine, built with
+   `nixpkgs.lib.nixosSystem` from a list of NixOS modules; and
+   `homeModules`, which is `import ./modules/home`, an attrset of
+   home-manager modules other flakes can import.
+2. **NixOS** evaluates `nixos/configuration.nix` plus
+   `home-manager.nixosModules.home-manager`. That module adds the
+   `home-manager.users.<name>` option, and setting
+   `home-manager.users.daniel = import ./home/daniel.nix` starts a second,
+   nested module evaluation for the user.
+3. **home-manager** evaluates `home/daniel.nix` and everything it imports,
+   including `self.homeModules.default`. `extraSpecialArgs = { inherit
+   inputs self; }` is what makes `self` and `inputs` available as module
+   arguments there.
+4. **The consumer flake** does the same as step 3, importing
+   `inputs.common.homeModules.default` instead of
+   `self.homeModules.default`.
+
+### What a module is
+
+A module is a function that takes `{ config, lib, pkgs, ... }` and returns
+up to three attributes:
+
+```nix
+{ config, lib, ... }:
+{
+  imports = [ ... ];              # more modules to pull in
+  options.bornedj.zsh = { ... };  # the schema: names, types, defaults
+  config = { ... };               # values, for any option of any module
+}
+```
+
+The module system collects every module reachable through `imports`,
+merges their `options` into one schema and their `config` into one value
+tree, and checks each value against its declared type. The `config`
+argument a module receives is that single merged result, not the module's
+own piece of it, which is why the zsh module can read
+`config.bornedj.flake.dir` even though `home/daniel.nix` set it. Nix is
+lazy, so this self-reference works as long as no value depends on itself.
+
+This shape is a convention, not a language feature. Nix is dynamically
+typed and has no typeclasses or interfaces; a module is an ordinary
+function or attrset. `lib.evalModules` (in nixpkgs' `lib/modules.nix`)
+enforces the convention at evaluation time:
+
+- It accepts a module as a path, an attrset or a function. For a function
+  calls it with the full set of module arguments (`config`, `lib`,
+  `options`, plus anything from `specialArgs`), and uses
+  `builtins.functionArgs` to look up any other declared name, such as
+  `pkgs`, in `_module.args`. Every named parameter is therefore supplied,
+  and the `...` is what lets a module accept the ones it does not name.
+- It checks the returned attrset's keys. When a module has an `options`
+  or `config` key, only those, `imports` and a few internal keys such as
+  `_file` and `disabledModules` are allowed, and any other key is an
+  error. A module with neither is treated as all `config`, which is why
+  host files like `home/daniel.nix` can set `programs.zsh...` at the top
+  level.
+- Option types (`lib.types.str`, `listOf`, `submodule`, ...) are a type
+  system written in Nix itself: each type is an attrset with a `check`
+  function and a `merge` function, run when values are merged. A wrong
+  value is an evaluation error with the option path in it, not a
+  compile-time error.
+
+The closest analogy is duck typing against a documented protocol.
+
+### How the `bornedj.*` tree is built
+
+Options exist as soon as a module declares them; there is no central
+registry. `bornedj` is this repo's namespace, so every shared option reads
+`config.bornedj.<program>.<option>`, next to home-manager's own options
+(`config.programs.zsh`, `config.home.packages`) in the same tree.
+
+- `modules/home/options.nix` declares the host facts every program needs:
+  `bornedj.flake.{dir,host}` and
+  `bornedj.workspace.{reposDir,clipboardCommand}`.
+- Each program module declares its own subtree, for example
+  `options.bornedj.zsh = { enable; generationRetention; secretsFile; }`.
+- `modules/home/default.nix` exports each module on its own
+  (`homeModules.zsh`, ...) and `default`, which imports them all.
+
+A module that reads the host facts imports `../options.nix` itself
+(today only zsh does), so every `homeModules.<program>` also works on its
+own; imports are deduplicated by path, so the repeat in `default` is
+harmless. Inside a module the usual idiom is
+`cfg = config.bornedj.zsh;` in a `let`, and the body reads `cfg.enable`.
+
+### The `lib.mk*` functions
+
+Declaring options:
+
+- `mkOption { type; default; description; }` declares one option. The
+  type decides how several definitions merge: `str` allows one (two
+  different values are an error), `lines` concatenates with newlines (the
+  shared `CLAUDE.md` plus a host section), `listOf` concatenates, `attrsOf`
+  merges keys, `nullOr str` allows `null` as "not set" (`extract_secret`
+  only exists when `zsh.secretsFile` is set), and `submodule` is a nested
+  option set (each entry of `tmux.sessions`).
+- `mkEnableOption "..."` is a boolean option defaulting to `false`. Every
+  program's `enable` uses it, so importing the modules changes nothing
+  until a host opts in.
+
+Setting values conditionally:
+
+- `mkIf cond { ... }` applies a block only when `cond` holds. Every
+  module's body is `config = lib.mkIf cfg.enable { ... }`. A plain `if`
+  would not work here: it forces `cfg.enable` while the module system is
+  still collecting definitions and recurses forever. `mkIf` is deferred.
+- `mkMerge [ a b ]` combines several blocks, typically unconditional and
+  `mkIf` parts. The nvim module is a `mkMerge` of the core and one `mkIf`
+  block per layer.
+
+Priorities, when two modules set the same single-valued option (lower
+number wins):
+
+- A plain assignment is priority 100.
+- `mkDefault x` is 1000. The shared zsh module sets
+  `oh-my-zsh.theme = lib.mkDefault "cloud"` and `home/programs/zsh.nix`
+  sets `"fwalch"`, which wins with no special syntax. Shared modules use
+  it for anything a host is expected to change.
+- `mkForce x` is 50, for overriding another module's plain assignment. It
+  is a last resort; nothing here needs it.
+- An option's `default` is 1500. Any definition replaces it rather than
+  merging with it, which is why the agent-config module sets the shared
+  `CLAUDE.md` in `config` with `mkBefore` instead of as the option
+  default: a default would disappear as soon as a host appended a
+  section.
+
+Ordering, for types that concatenate (`lines`, lists): `mkOrder n x` puts
+a definition at position `n`, lower first, plain definitions at 1000.
+`mkBefore` is `mkOrder 500` and `mkAfter` is `mkOrder 1500`. That is how
+init files are assembled from several modules in a known order:
+
+| Option                       | Order | Content                         |
+| ---------------------------- | ----- | ------------------------------- |
+| `programs.neovim.initLua`    | 200   | home-manager's preamble         |
+|                              | 300   | `options.lua`                   |
+|                              | 350   | copilot globals                 |
+|                              | 400   | host colours                    |
+| `programs.zsh.initContent`   | 800   | oh-my-zsh (home-manager)        |
+|                              | 900   | vi mode, after `bindkey -e`     |
+| `programs.tmux.extraConfig`  | 900   | shared `tmux.conf`              |
+|                              | 1000  | host theme, dotbar              |
+|                              | 1900  | Claude status inject            |
+|                              | 2000  | continuum                       |
+
+The obsidian vaults use `mkBefore` so `personal` stays first and other
+hosts' vaults append after it.
+
+### Putting it together
+
+A shared module defines what every host gets, gated by `mkEnableOption`
+and soft-set with `mkDefault` where hosts differ. A host turns features on
+and adds its own definitions to the same options. The module system
+merges them by type: lists and lines concatenate in `mkOrder` order,
+attrsets such as `shellAliases` and `programs.git.settings` merge per key,
+and single values follow priority. A host's own layer is nothing more
+than ordinary definitions on those same options.
 
 ## Is this idiomatic?
 
