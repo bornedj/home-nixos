@@ -174,9 +174,13 @@ Startup then runs in this order:
 
 1. **`init.lua`**, assembled by home-manager from `programs.neovim.initLua`
    pieces in `mkOrder` order: home-manager's own preamble at 200, the
-   shared `options.lua` at 300 (sets `mapleader` and `vim.opt`), the host's
-   colour script at 400. Nothing else goes through `initLua`; no plugin
-   `config` strings are used.
+   shared `options.lua` at 300 (sets `mapleader` and `vim.opt`), the
+   copilot globals at 350 when that layer is on, the host's colour script
+   at 400. Nothing else goes through `initLua`; no plugin `config` strings
+   are used. The copilot globals are here because copilot.vim reads
+   `copilot_no_tab_map` while its own `plugin/` file is sourced, and
+   `init.lua` is the only stage guaranteed to run before every `plugin/`
+   file.
 
    Colours run here, before any plugin, on purpose: `:colorscheme` clears
    every highlight group, and obsidian.nvim defines its groups only once
@@ -206,7 +210,11 @@ Startup then runs in this order:
    the buffer-local DAP maps for `jdtls` clients and calls
    `vim.lsp.enable 'jdtls'`; `bornedj-qml.lua` enables `qmlls`;
    `bornedj-wsl.lua` defines the Windows maps (`<leader>gB` for git-bash,
-   because telescope owns `<leader>gb`).
+   because telescope owns `<leader>gb`); `bornedj-copilot.lua` maps insert
+   `<C-y>` to accept a suggestion. nvim-cmp wraps whatever `<C-y>` map
+   exists on the first `InsertEnter` and falls back to it when the
+   completion menu is closed, so that map only has to exist by the end of
+   startup.
 3. **`lsp/<server>.lua` and `after/lsp/<server>.lua`** are read lazily when
    a server is enabled. nvim-lspconfig ships the stock definitions in
    `lsp/`; our per-server settings live in `after/lsp/` (eslint,
@@ -216,13 +224,10 @@ Startup then runs in this order:
    `lua_ls` reads `generated.lua_libraries`; `jdtls` reads
    `generated.jdtls_cmd` and uses `root_markers` (`pom.xml`, `mvnw`,
    `gradlew`, `.git`).
-4. **`after/plugin/` files**, which run after every `plugin/` file. Copilot
-   (`bornedj-copilot`) and gitlab.vim (work layer) live here. Both map
-   insert `<C-y>`. nvim-cmp wraps whatever `<C-y>` map exists on the first
-   `InsertEnter` and falls back to it when the completion menu is closed,
-   so these maps have to exist before that wrapper runs; `after/plugin` is
-   the stage that guarantees it. Gitlab's map only appears once its
-   language server has started, which is the same timing as before.
+4. **`after/plugin/` files**, which run after every `plugin/` file. The
+   shared layers have none; this stage is for overriding something another
+   plugin's `plugin/` file set up. A host layer may use it, as the work
+   layer does for its gitlab.vim setup.
 
 `after/queries/markdown/*.scm` in the core layer extend the stock markdown
 queries (`; extends`), which the old `initLua` setup never put on the
