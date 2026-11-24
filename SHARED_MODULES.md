@@ -302,6 +302,51 @@ Two parts are conventions rather than ecosystem standards:
   the modules directory can move without changing the consumer.
 - **Copying files between repos** (the previous state). Rejected: that is
   what produced the drift.
+- **One source repo per program, pulled in as `flake = false` inputs.**
+  Each config (nvim, tmux, git) lives in its own plain repo, and the
+  hosts fetch it as a pinned input and link or read it:
+
+  ```nix
+  inputs.nvim-config = {
+    url = "github:bornedj/nvim-config";
+    flake = false;
+  };
+
+  xdg.configFile."nvim".source = inputs.nvim-config;
+  programs.tmux.extraConfig =
+    builtins.readFile "${inputs.tmux-config}/tmux.conf";
+  ```
+
+  The input is an attrset of metadata (`outPath`, `rev`, `narHash`, ...)
+  whose `outPath` is the repo copied into the store; the tree is reached
+  through paths (`builtins.readFile`, `builtins.readDir`, `import`), and
+  because inputs are fetched before evaluation this is not
+  import-from-derivation. The pattern is common for unpackaged plugin
+  sources and for configs that must also work on machines without Nix.
+
+  Its strength is that each config stays usable without Nix and has its
+  own history. Rejected here because:
+
+  - Raw files do not merge. A linked `~/.config/nvim` is all or nothing,
+    so a host's additions (plugins, servers, aliases, tmux lines, vaults,
+    instruction sections) would become copied files or runtime hostname
+    checks, the work-machine flag rejected below.
+  - The Lua and the plugins and servers it needs would be declared in
+    different repos, the same split that caused the drift. Giving each
+    repo its own flake and module to fix that turns it into one flake per
+    program; fetching plugins at runtime with lazy.nvim or mason gives up
+    reproducibility.
+  - Values Nix computes (store paths for jdtls and qmlls, Lua library
+    stubs, secret file paths) have no place in a static repo, so a
+    generated module would still be needed on the Nix side.
+  - Every repo is another lock entry to bump and another place to review,
+    and changes that span programs (the Claude status indicator touches
+    tmux, scripts and agent-config) need coordinated commits.
+
+  The two combine if a non-Nix machine ever needs the Neovim config: move
+  `modules/home/nvim/core` into its own repo and set
+  `src = inputs.nvim-core` in place of `./core`. The module, layers,
+  generated Lua and host merging stay as they are.
 - **Shared Nix functions instead of modules.** Functions return values; they
   do not merge. The module system is what lets a host add a plugin, an
   alias or a tmux line without touching the shared definition.
