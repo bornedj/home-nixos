@@ -11,11 +11,11 @@
   appear in someones IDE through hover/definition features is a special case.
 - When writing markdown do not rely on line wrapping, use line breaks around
   the 80 column.
-  > This is not an enterprise standard, but something Daniel follows. This rule
-  > only applies to markdown you create. For example, you should not provide
-  > /code-review feedback that markdown doesn't wrap around 80 characters
-  > unless that commit is signed with my user.
-- When writing markdown documentation save it under the /docs directory.
+  > This is not a universal standard, but it is for markdown generated for or
+  > on behalf of Daniel. This rule only applies to markdown you create. For
+  > example, you should not provide /code-review feedback that markdown
+  > doesn't wrap around 80 characters unless that commit is signed with my
+  > user.
 - When writing commit messages, NEVER auto-add your agent name as co-author
 - Never manually modify CHANGELOG.md files or any files that are auto-generated
 - When making technical decisions, do not give much weight to development cost.
